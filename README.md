@@ -17,42 +17,6 @@ the full 3-stage roadmap and what to build next.
 
 That's it — you do not need Python, Node, or Postgres installed locally.
 
-## Setup on Windows
-
-Everything below (all commands, all URLs) is identical on Windows — Docker Compose
-behaves the same on every OS. The only Windows-specific steps are installing Docker
-itself and getting the project folder onto the machine.
-
-1. **Install Docker Desktop for Windows**: https://www.docker.com/products/docker-desktop/
-   - During install, keep **"Use WSL 2 instead of Hyper-V"** checked (the default) —
-     this is required.
-   - If setup complains that WSL2 isn't installed, open PowerShell **as
-     Administrator** and run `wsl --install`, reboot, then re-run the Docker installer.
-   - If it complains about virtualization, enable "Virtualization Technology" /
-     "Intel VT-x" / "AMD-V" in the laptop's BIOS (varies by manufacturer).
-   - After install, **launch Docker Desktop** and wait for the whale icon in the
-     system tray to say it's running before doing anything else.
-
-2. **Get the project folder onto the Windows machine.** Since this isn't in a git
-   repo yet, pick one:
-   - Zip the `NLP-Project` folder and share it (USB / Drive / WhatsApp / etc.), then
-     unzip it on Windows.
-   - Or push it to a GitHub repo and have your friend `git clone` it — better if
-     you'll both keep editing it. Ask if you want help setting that up.
-
-3. **Open PowerShell in the project folder** (Shift + right-click the folder in File
-   Explorer → "Open in Terminal" / "Open PowerShell window here"), then run the exact
-   same commands as below (`docker compose up -d --build`, etc.).
-
-**Windows-specific gotchas:**
-- Port `5432` (Postgres) is sometimes already taken by a locally-installed Postgres
-  on dev machines. If `docker compose up` fails with a port-in-use error, either
-  stop the local Postgres service or change the left side of `"5432:5432"` in
-  `docker-compose.yml` (e.g. `"5433:5432"` — only affects host access, containers
-  still talk to each other on 5432 internally).
-- Use **PowerShell**, not the old `cmd.exe` — smoother with Docker Desktop and quoting.
-- `localhost` URLs (`:5173`, `:8000`, `:5050`) work the same in a Windows browser.
-
 ## Running the project
 
 From the repo root:
