@@ -1,0 +1,30 @@
+# Secrets — never commit real env files, only .env.example
+.env
+.env.local
+**/.env
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+
+# Docker
+docker-compose.override.yml
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
