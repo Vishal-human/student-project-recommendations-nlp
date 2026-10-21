@@ -24,3 +24,18 @@ export const getStudentDashboard = () => request('/dashboard/student')
 export const getTeacherDashboard = () => request('/dashboard/teacher')
 export const getStudents = () => request('/teacher/students')
 export const getDomains = () => request('/topics/domains')
+export const getRecommendations = (payload) =>
+  request('/topics/recommend', { method: 'POST', body: JSON.stringify(payload) })
+export const checkDuplicates = (topics) =>
+  request('/supervisor/check-duplicates', { method: 'POST', body: JSON.stringify(topics) })
+
+// Proposal endpoints
+export const submitProposal = (payload) =>
+  request('/proposals/submit', { method: 'POST', body: JSON.stringify(payload) })
+export const getMyProposals = () => request('/proposals/mine')
+export const getPendingProposals = () => request('/proposals/pending')
+export const getAllProposals = () => request('/proposals/all')
+export const approveProposal = (id, notes = '') =>
+  request(`/proposals/${id}/approve`, { method: 'POST', body: JSON.stringify({ notes }) })
+export const rejectProposal = (id, notes = '') =>
+  request(`/proposals/${id}/reject`, { method: 'POST', body: JSON.stringify({ notes }) })

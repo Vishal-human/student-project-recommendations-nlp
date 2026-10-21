@@ -1,0 +1,80 @@
+# Feasibility scoring rules — editable without touching Python code.
+# All domain→required-skill and complexity-tier mappings live here.
+#
+# complexity_tiers:
+#   beginner: doable in 2-3 weeks with basic skills
+#   intermediate: needs 4-6 weeks and solid fundamentals
+#   advanced: 8+ weeks or specialist skills needed
+
+complexity_penalty:
+  beginner: 0        # no time penalty
+  intermediate: 15   # moderate reduction if time is short
+  advanced: 30       # heavy reduction if time is short
+
+# Time thresholds below which a penalty is applied for that tier
+time_thresholds:
+  intermediate: 3    # fewer than 3 weeks → apply intermediate penalty
+  advanced: 6        # fewer than 6 weeks → apply advanced penalty
+
+# Team size multiplier — small team on a big topic is a risk
+team_size_min:
+  intermediate: 1    # solo fine for intermediate
+  advanced: 2        # advanced projects really need 2+ people
+
+team_size_penalty: 10  # points deducted if team_size < required minimum
+
+# Domain → list of tech tags the topic typically requires.
+# Tags must be from TAG_LIST in backend/data/tags.py.
+# If a student's stack does not include a required tag, it is flagged as missing.
+domain_requirements:
+  nlp:
+    required: ["python", "nlp"]
+    complexity_tier: intermediate
+  computer-vision:
+    required: ["python", "computer-vision"]
+    complexity_tier: advanced
+  machine-learning:
+    required: ["python", "machine-learning"]
+    complexity_tier: intermediate
+  deep-learning:
+    required: ["python", "deep-learning"]
+    complexity_tier: advanced
+  edtech:
+    required: ["python"]
+    complexity_tier: beginner
+  hr-tech:
+    required: ["python", "nlp"]
+    complexity_tier: intermediate
+  e-commerce:
+    required: ["python", "sql"]
+    complexity_tier: intermediate
+  finance:
+    required: ["python", "data-analysis"]
+    complexity_tier: intermediate
+  social-media:
+    required: ["python", "api-integration"]
+    complexity_tier: intermediate
+  healthcare:
+    required: ["python", "machine-learning"]
+    complexity_tier: advanced
+  data-analysis:
+    required: ["python", "data-analysis"]
+    complexity_tier: beginner
+
+# Per-stack-tag minimum required skills for the topic tag itself
+tech_requirements:
+  "nlp": ["python"]
+  "machine-learning": ["python"]
+  "deep-learning": ["python", "machine-learning"]
+  "computer-vision": ["python"]
+  "data-analysis": ["python"]
+  "react": ["javascript", "html", "css"]
+  "nodejs": ["javascript"]
+  "fastapi": ["python"]
+  "flask": ["python"]
+  "django": ["python"]
+  "docker": []
+  "firebase": ["javascript"]
+  "mongodb": []
+  "sql": []
+  "api-integration": []

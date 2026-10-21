@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Integer, String, func
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, func
 
 from app.db.database import Base
 
@@ -14,3 +14,27 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     reset_token = Column(String, nullable=True)
     reset_token_expires = Column(DateTime(timezone=True), nullable=True)
+
+
+class ProjectProposal(Base):
+    """A student's submitted project proposal.
+
+    Status lifecycle: pending -> approved | rejected
+    Only ONE proposal per student can be approved.
+    When a proposal is approved, its title is treated as "taken" by the NLP pipeline —
+    future recommendations filter out semantically similar topics.
+    """
+    __tablename__ = "project_proposals"
+
+    id = Column(Integer, primary_key=True, index=True)
+    student_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    title = Column(String, nullable=False)
+    abstract = Column(Text, nullable=True)           # optional description
+    interest_desc = Column(Text, nullable=True)      # what the student typed in the form
+    stack_tags = Column(String, nullable=True)       # JSON array serialized as string
+    submitted_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
+    # Status: "pending" | "approved" | "rejected"
+    status = Column(String, nullable=False, default="pending", index=True)
+    reviewed_at = Column(DateTime(timezone=True), nullable=True)
+    reviewer_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    reviewer_notes = Column(Text, nullable=True)
