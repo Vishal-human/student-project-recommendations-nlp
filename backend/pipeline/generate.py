@@ -13,8 +13,10 @@ from __future__ import annotations
 import json
 import os
 import re
+import ssl
 import urllib.request
 
+import certifi
 import numpy as np
 
 from data.tags import TAG_LIST
@@ -74,7 +76,8 @@ def _llm_candidates(req: RecommendRequest, avoid_titles: list[str], n: int) -> l
         data=body,
         headers={"x-goog-api-key": api_key, "content-type": "application/json"},
     )
-    with urllib.request.urlopen(http_req, timeout=40) as resp:
+    ctx = ssl.create_default_context(cafile=certifi.where())   # macOS Python lacks system CA certs
+    with urllib.request.urlopen(http_req, timeout=40, context=ctx) as resp:
         text = json.loads(resp.read())["candidates"][0]["content"]["parts"][0]["text"]
     rows = json.loads(re.search(r"\[.*\]", text, re.S).group(0))
     return [_Candidate(r["title"], r.get("abstract", ""), r.get("tech_stack", [])) for r in rows]
@@ -114,20 +117,20 @@ def generate_topics(
     index: FaissIndexWrapper,
     approved_titles: list[str],
     n: int = 5,
-) -> tuple[str, list[GeneratedItem]]:
-    """Return (source, items). Items are new topics, ranked, each unique vs the corpus."""
+) -> tuple[str, list[GeneratedItem], str]:
+    """Return (source, items, fallback_reason). Items are new topics, ranked, each unique vs the corpus."""
     neighbours = query(index, req.interests, k=10)
     avoid = [m.entry.title for m in neighbours] + approved_titles[:10]
 
     try:
         candidates = _llm_candidates(req, avoid, n + 3)
-        source = "llm"
-    except Exception:
+        source, reason = "llm", ""
+    except Exception as exc:
         candidates = _template_candidates(req, neighbours, n + 3)
-        source = "template"
+        source, reason = "template", f"{type(exc).__name__}: {exc}"[:160]
 
     if not candidates:
-        return source, []
+        return source, [], reason
 
     cand_vecs = _embed([f"{c.title}. {c.abstract}" for c in candidates])
     query_vec = _embed([req.interests])[0]
@@ -179,4 +182,4 @@ def generate_topics(
         kept_vecs.append(vec)
 
     kept.sort(key=lambda x: x[0], reverse=True)
-    return source, [item for _, item in kept[:n]]
+    return source, [item for _, item in kept[:n]], reason

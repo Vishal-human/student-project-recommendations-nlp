@@ -13,7 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.db.models import User
-from app.deps import get_current_user
+from app.deps import require_roles
 
 _BACKEND_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_BACKEND_ROOT) not in sys.path:
@@ -55,7 +55,7 @@ class DuplicateCheckResponse(BaseModel):
 @router.post("/check-duplicates", response_model=DuplicateCheckResponse)
 def check_duplicates(
     topics: list[SubmittedTopic],
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_roles("teacher", "supervisor")),
 ):
     """Detect near-duplicate project topics across all submitted topics.
 

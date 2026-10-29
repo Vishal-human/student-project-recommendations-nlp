@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { login as loginApi } from '../api.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
+const ROLE_LABEL = { student: 'Student', teacher: 'Teacher', supervisor: 'Supervisor' }
+
 export default function Login() {
   const [role, setRole] = useState('student')
   const [email, setEmail] = useState('')
@@ -19,13 +21,13 @@ export default function Login() {
       if (data.role !== role) {
         setError(
           `This account is registered as a ${data.role}. Switch to "${
-            data.role === 'teacher' ? 'Teacher' : 'Student'
+            ROLE_LABEL[data.role] || 'Student'
           }" above and log in again.`,
         )
         return
       }
       login(data)
-      navigate(data.role === 'teacher' ? '/teacher' : '/student')
+      navigate(`/${data.role}`)
     } catch (err) {
       setError(err.message)
     }
@@ -55,6 +57,15 @@ export default function Login() {
         >
           Teacher
         </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={role === 'supervisor'}
+          className={role === 'supervisor' ? 'active' : ''}
+          onClick={() => setRole('supervisor')}
+        >
+          Supervisor
+        </button>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -68,7 +79,7 @@ export default function Login() {
             Forgot password?
           </Link>
         </div>
-        <button type="submit">Log In as {role === 'teacher' ? 'Teacher' : 'Student'}</button>
+        <button type="submit">Log In as {ROLE_LABEL[role]}</button>
       </form>
 
       {role === 'student' && (
@@ -76,8 +87,8 @@ export default function Login() {
           New student? <Link to="/signup">Create an account</Link>
         </p>
       )}
-      {role === 'teacher' && (
-        <p className="muted">Teacher accounts are set up by the project team, not self-registered.</p>
+      {role !== 'student' && (
+        <p className="muted">{ROLE_LABEL[role]} accounts are set up by the project team, not self-registered.</p>
       )}
     </div>
   )

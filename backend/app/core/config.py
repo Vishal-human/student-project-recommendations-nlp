@@ -17,3 +17,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "480"
 TEACHER_EMAIL = os.getenv("TEACHER_EMAIL", "teacher@college.edu")
 TEACHER_PASSWORD = os.getenv("TEACHER_PASSWORD", "teacher123")
 TEACHER_NAME = os.getenv("TEACHER_NAME", "Default Teacher")
+
+SUPERVISOR_EMAIL = os.getenv("SUPERVISOR_EMAIL", "supervisor@college.edu")
+SUPERVISOR_PASSWORD = os.getenv("SUPERVISOR_PASSWORD", "supervisor123")
+SUPERVISOR_NAME = os.getenv("SUPERVISOR_NAME", "Default Supervisor")

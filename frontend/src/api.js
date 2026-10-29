@@ -21,6 +21,7 @@ export const forgotPassword = (payload) =>
 export const resetPassword = (payload) =>
   request('/auth/reset-password', { method: 'POST', body: JSON.stringify(payload) })
 export const getStudentDashboard = () => request('/dashboard/student')
+export const getSupervisorDashboard = () => request('/dashboard/supervisor')
 export const getTeacherDashboard = () => request('/dashboard/teacher')
 export const getStudents = () => request('/teacher/students')
 export const getDomains = () => request('/topics/domains')
