@@ -42,3 +42,25 @@ export const approveProposal = (id, notes = '') =>
   request(`/proposals/${id}/approve`, { method: 'POST', body: JSON.stringify({ notes }) })
 export const rejectProposal = (id, notes = '') =>
   request(`/proposals/${id}/reject`, { method: 'POST', body: JSON.stringify({ notes }) })
+
+// Dataset management & file upload
+export async function uploadCorpusFile(file) {
+  const token = localStorage.getItem('token')
+  const formData = new FormData()
+  formData.append('file', file)
+  const headers = {}
+  if (token) headers.Authorization = `Bearer ${token}`
+
+  const res = await fetch(`${API_URL}/supervisor/corpus/upload`, {
+    method: 'POST',
+    headers,
+    body: formData,
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) {
+    throw new Error(data.detail || 'File upload failed')
+  }
+  return data
+}
+
+export const getCorpusStats = () => request('/supervisor/corpus/stats')

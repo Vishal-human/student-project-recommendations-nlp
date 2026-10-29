@@ -44,6 +44,15 @@ _CORPUS_PATH = _BACKEND_ROOT / "data" / "sample_corpus.json"
 _corpus = load_corpus(str(_CORPUS_PATH))
 _index = build_index(_corpus)
 
+
+def reload_corpus_and_index() -> int:
+    """Hot-reload corpus from disk and re-build FAISS vector index."""
+    global _corpus, _index
+    _corpus = load_corpus(str(_CORPUS_PATH))
+    _index = build_index(_corpus)
+    return len(_corpus)
+
+
 # Similarity threshold below which a recommendation is considered "taken"
 _TAKEN_THRESHOLD = 0.82
 

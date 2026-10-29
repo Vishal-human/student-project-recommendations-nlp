@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar.jsx'
 import SupervisorDashboard from './SupervisorDashboard.jsx'
+import DatasetUploader from '../components/DatasetUploader.jsx'
 import { getSupervisorDashboard, getAllProposals } from '../api.js'
 
 const STATUS_COLOR = { pending: '#f59e0b', approved: '#22c55e', rejected: '#ef4444' }
@@ -34,15 +35,38 @@ export default function SupervisorHome() {
     <div>
       <Navbar />
       <div className="page">
-        <h1 style={{ margin: '0 0 4px' }}>Supervisor Dashboard</h1>
-        <p className="muted">
-          Institution-level oversight: see every proposal (read-only) and run the AI duplicate detector.
-          Approving or rejecting is done by teachers.
-        </p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h1 style={{ margin: '0 0 4px' }}>Supervisor Dashboard</h1>
+            <p className="muted" style={{ margin: 0 }}>
+              Institution-level oversight: see all proposals, upload corpus dataset files, and run the AI duplicate detector.
+            </p>
+          </div>
+          <button
+            onClick={() => setTab('dataset')}
+            style={{
+              background: tab === 'dataset' ? '#22c55e' : '#6366f1',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 8,
+              padding: '10px 18px',
+              fontWeight: 600,
+              fontSize: 14,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: '0 4px 12px rgba(99, 102, 241, 0.25)'
+            }}
+          >
+            📁 + Add Data File
+          </button>
+        </div>
         {error && <p style={{ color: '#f87171' }}>{error}</p>}
 
-        <div style={{ display: 'flex', gap: 10, margin: '16px 0' }}>
+        <div style={{ display: 'flex', gap: 10, margin: '16px 0', flexWrap: 'wrap' }}>
           <button style={tabStyle(tab === 'overview')} onClick={() => setTab('overview')}>Overview</button>
+          <button style={tabStyle(tab === 'dataset')} onClick={() => setTab('dataset')}>📁 Add Data File (Corpus)</button>
           <button style={tabStyle(tab === 'proposals')} onClick={() => setTab('proposals')}>All Proposals</button>
           <button style={tabStyle(tab === 'duplicates')} onClick={() => setTab('duplicates')}>Duplicate Detector</button>
         </div>
@@ -59,6 +83,8 @@ export default function SupervisorHome() {
             </div>
           </div>
         )}
+
+        {tab === 'dataset' && <DatasetUploader />}
 
         {tab === 'proposals' && (
           <div className="card">

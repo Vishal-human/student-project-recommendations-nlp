@@ -38,3 +38,22 @@ class ProjectProposal(Base):
     reviewed_at = Column(DateTime(timezone=True), nullable=True)
     reviewer_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     reviewer_notes = Column(Text, nullable=True)
+
+
+class CorpusProject(Base):
+    """Archived historical project in the university corpus.
+
+    Synced with data/sample_corpus.json. Stores uploaded capstones,
+    preprocessed tags, and domains.
+    """
+    __tablename__ = "corpus_projects"
+
+    id = Column(String, primary_key=True)
+    title = Column(String, nullable=False)
+    abstract = Column(Text, nullable=False)
+    year = Column(Integer, nullable=False)
+    department = Column(String, nullable=False)
+    tech_stack_tags = Column(String, nullable=False)  # JSON string
+    domain_tags = Column(String, nullable=False)      # JSON string
+    source = Column(String, default="upload")         # "seed" | "upload"
+    uploaded_at = Column(DateTime(timezone=True), server_default=func.now())

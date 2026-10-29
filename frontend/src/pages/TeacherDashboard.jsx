@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import Navbar from '../components/Navbar.jsx'
+import DatasetUploader from '../components/DatasetUploader.jsx'
 import {
   getStudents, getTeacherDashboard,
   getPendingProposals, getAllProposals,
@@ -231,7 +232,6 @@ export default function TeacherDashboard() {
     }
     setDupLoading(true)
     try {
-      // Auto-format — teacher doesn't type anything
       const topics = pending.map(p => ({
         student_name: p.student_name || 'Unknown',
         roll_no: p.roll_no || p.id.toString(),
@@ -255,8 +255,32 @@ export default function TeacherDashboard() {
     <div>
       <Navbar />
       <div className="page">
-        <h1>Supervisor Panel</h1>
-        <p className="muted">Welcome, {auth?.name} — manage project proposals and detect duplicates.</p>
+        {/* Header with Title and Add Data File button */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h1 style={{ margin: '0 0 4px' }}>Supervisor & Teacher Panel</h1>
+            <p className="muted" style={{ margin: 0 }}>Welcome, {auth?.name} — manage project proposals, add corpus dataset files, and detect duplicates.</p>
+          </div>
+          <button
+            onClick={() => setTab('dataset')}
+            style={{
+              background: tab === 'dataset' ? '#22c55e' : '#6366f1',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 8,
+              padding: '10px 18px',
+              fontWeight: 600,
+              fontSize: 14,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: '0 4px 12px rgba(99, 102, 241, 0.25)'
+            }}
+          >
+            📁 + Add Data File
+          </button>
+        </div>
 
         {/* Stats */}
         <div className="stat-grid" style={{ marginBottom: 20 }}>
@@ -277,6 +301,9 @@ export default function TeacherDashboard() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
           <button style={tabStyle(tab === 'proposals')} onClick={() => setTab('proposals')}>
             Proposals {pending.length > 0 && `(${pending.length} pending)`}
+          </button>
+          <button style={tabStyle(tab === 'dataset')} onClick={() => setTab('dataset')}>
+            📁 Add Data File (Corpus)
           </button>
           <button style={tabStyle(tab === 'duplicates')} onClick={() => setTab('duplicates')}>
             Duplicate Detector
@@ -325,6 +352,11 @@ export default function TeacherDashboard() {
               </div>
             )}
           </div>
+        )}
+
+        {/* ── Add Data File & Corpus Tab ── */}
+        {tab === 'dataset' && (
+          <DatasetUploader />
         )}
 
         {/* ── Duplicate Detector Tab ── */}
