@@ -2,48 +2,59 @@
 Full NLP Project Documentation Generator
 Run from project root:  backend\.venv\Scripts\python.exe generate_full_docx.py
 """
-import os, re, sys
+import os, sys
 sys.stdout.reconfigure(encoding="utf-8")
 
 import docx
 from docx.shared import Inches, Pt, RGBColor, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
+from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
 from pathlib import Path
 
 ASSETS = Path("backend/extracted_assets")
-IMG_STUDENT  = Path(r"C:\Users\samarth10\.gemini\antigravity-ide\brain\772c301a-d143-41d0-b209-7875b79d8da1\.user_uploaded\media_1792615211366.png")
-IMG_LOGIN    = Path(r"C:\Users\samarth10\.gemini\antigravity\brain\772c301a-d143-41d0-b209-7875b79d8da1\.user_uploaded\media_1793300209237_d14591ac.png")
-IMG_DASH     = Path(r"C:\Users\samarth10\.gemini\antigravity\brain\772c301a-d143-41d0-b209-7875b79d8da1\.user_uploaded\media_1793302553934_f2ddee8b.jpg")
+
+# Verified clean standard PNG assets
+LOGO_GLS_100 = ASSETS / "clean_page_1_1__Im10.png"
+LOGO_GLS_A   = ASSETS / "clean_page_1_2__Im14.png"
+FIG_ARCH     = ASSETS / "clean_page_1_3__Im176.png"
+FIG_FLOW     = ASSETS / "clean_page_1_4__Im191.png"
+
+UI_LOGIN     = ASSETS / "ui_login.png"
+UI_STUDENT   = ASSETS / "ui_student.png"
+UI_TEACHER   = ASSETS / "ui_teacher.png"
+
+CHART_PR     = ASSETS / "chart_precision_recall.png"
+CHART_MRR    = ASSETS / "chart_mrr.png"
+CHART_LAT    = ASSETS / "chart_latency.png"
+CHART_CM     = ASSETS / "chart_confusion_matrix.png"
+CHART_RADAR  = ASSETS / "chart_radar.png"
+CHART_CALIB  = ASSETS / "chart_threshold_calibration.png"
+CHART_PIE    = ASSETS / "chart_domain_pie.png"
 
 doc = docx.Document()
 
-# --- Page Setup A4 ---
+# --- Page Setup A4 Margins ---
 for section in doc.sections:
     section.top_margin    = Cm(2.54)
     section.bottom_margin = Cm(2.54)
-    section.left_margin   = Cm(3.17)
+    section.left_margin   = Cm(3.0)
     section.right_margin  = Cm(2.54)
     section.page_width    = Cm(21.0)
     section.page_height   = Cm(29.7)
 
-# --- Normal style ---
+# --- Normal style: Times New Roman, 12pt, 1.15 line spacing ---
 style_normal = doc.styles['Normal']
 style_normal.font.name = 'Times New Roman'
 style_normal.font.size = Pt(12)
-style_normal.paragraph_format.line_spacing = Pt(18)
+style_normal.paragraph_format.line_spacing = 1.15
 style_normal.paragraph_format.space_after  = Pt(6)
 
-ACCENT   = RGBColor(0x0F, 0x22, 0x40)   # deep navy
-SEC_CLR  = RGBColor(0x1E, 0x3A, 0x5F)   # section blue
+ACCENT   = RGBColor(0x0F, 0x22, 0x40)
+SEC_CLR  = RGBColor(0x1E, 0x3A, 0x5F)
 TBL_HEAD = "D6E4F0"
-TBL_ALT  = "F0F7FF"
-
-# ────────────────────────────────────────────────────────────────────
-# Helpers
-# ────────────────────────────────────────────────────────────────────
+TBL_ALT  = "F8FAFC"
 
 def set_cell_bg(cell, hex_color):
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{hex_color}" w:val="clear"/>')
@@ -60,7 +71,7 @@ def cell_font(cell, bold=False, size=11, center=False):
 def add_hr():
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
-    p.paragraph_format.space_after  = Pt(2)
+    p.paragraph_format.space_after  = Pt(4)
     pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
     bottom = OxmlElement('w:bottom')
@@ -73,8 +84,8 @@ def add_hr():
 
 def heading(text, level=1, num=""):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(16)
-    p.paragraph_format.space_after  = Pt(6)
+    p.paragraph_format.space_before = Pt(14)
+    p.paragraph_format.space_after  = Pt(4)
     p.paragraph_format.keep_with_next = True
     if num:
         rn = p.add_run(num + "  ")
@@ -94,8 +105,8 @@ def heading(text, level=1, num=""):
 def body(text, justify=True, bold_prefix=None, italic=False):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY if justify else WD_ALIGN_PARAGRAPH.LEFT
-    p.paragraph_format.space_after  = Pt(6)
-    p.paragraph_format.line_spacing = Pt(18)
+    p.paragraph_format.space_after  = Pt(5)
+    p.paragraph_format.line_spacing = 1.15
     if bold_prefix:
         rb = p.add_run(bold_prefix)
         rb.font.name = 'Times New Roman'
@@ -112,7 +123,7 @@ def bullet(text, bold_prefix=None, indent=0.25):
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.left_indent  = Inches(indent)
     p.paragraph_format.space_after  = Pt(4)
-    p.paragraph_format.line_spacing = Pt(17)
+    p.paragraph_format.line_spacing = 1.15
     if bold_prefix:
         rb = p.add_run(bold_prefix)
         rb.font.name = 'Times New Roman'
@@ -127,8 +138,8 @@ def numbered(text, num, bold_prefix=None):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.left_indent  = Inches(0.3)
-    p.paragraph_format.space_after  = Pt(5)
-    p.paragraph_format.line_spacing = Pt(17)
+    p.paragraph_format.space_after  = Pt(4)
+    p.paragraph_format.line_spacing = 1.15
     rn = p.add_run(f"{num}. ")
     rn.font.bold = True
     rn.font.name = 'Times New Roman'
@@ -145,8 +156,8 @@ def numbered(text, num, bold_prefix=None):
 
 def code_block(code_str):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
-    p.paragraph_format.space_after  = Pt(8)
+    p.paragraph_format.space_before = Pt(3)
+    p.paragraph_format.space_after  = Pt(6)
     p.paragraph_format.left_indent  = Inches(0.2)
     r = p.add_run(code_str)
     r.font.name  = 'Courier New'
@@ -162,43 +173,14 @@ def insert_image(path, width_in=5.5, caption=None):
             p = doc.add_paragraph()
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p.paragraph_format.space_before = Pt(2)
-            p.paragraph_format.space_after  = Pt(8)
+            p.paragraph_format.space_after  = Pt(6)
             r = p.add_run(caption)
             r.font.name   = 'Times New Roman'
             r.font.size   = Pt(10)
             r.font.italic = True
             r.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
-    else:
-        body(f"[Image not found: {path}]", italic=True)
 
-def caption_only(text):
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(2)
-    p.paragraph_format.space_after  = Pt(8)
-    r = p.add_run(text)
-    r.font.name   = 'Times New Roman'
-    r.font.size   = Pt(10)
-    r.font.italic = True
-    r.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
-
-def note_box(text):
-    tbl = doc.add_table(rows=1, cols=1)
-    tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-    cell = tbl.rows[0].cells[0]
-    set_cell_bg(cell, "FFF7ED")
-    p = cell.paragraphs[0]
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    r = p.add_run(text)
-    r.font.name = 'Times New Roman'
-    r.font.size = Pt(11)
-    r.font.italic = True
-    doc.add_paragraph().paragraph_format.space_after = Pt(6)
-
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 1 — COVER
-# ═══════════════════════════════════════════════════════════════════
-def centre(text, size, bold=False, space_before=0, space_after=6, italic=False, color=None):
+def centre(text, size, bold=False, space_before=0, space_after=4, italic=False, color=None):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_before = Pt(space_before)
@@ -212,727 +194,500 @@ def centre(text, size, bold=False, space_before=0, space_after=6, italic=False, 
         r.font.color.rgb = color
     return p
 
-centre("GLS UNIVERSITY", 22, bold=True, space_before=28, space_after=4, color=ACCENT)
-centre("Faculty of Computer Applications & Information Technology", 15, bold=True, italic=True, space_after=6)
-centre("Integrated Master of Computer Applications (iMCA) Programme", 14, bold=True, space_after=6)
-centre("Semester IX  |  Academic Year 2026–27", 13, space_after=28)
+# ==========================================
+# 1. COVER PAGE (With University Logos)
+# ==========================================
+# Top logo table with left & right logos
+if LOGO_GLS_A.exists() and LOGO_GLS_100.exists():
+    tbl_logos = doc.add_table(rows=1, cols=2)
+    tbl_logos.alignment = WD_TABLE_ALIGNMENT.CENTER
+    c_left = tbl_logos.rows[0].cells[0]
+    c_right = tbl_logos.rows[0].cells[1]
+    
+    p_l = c_left.paragraphs[0]
+    p_l.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    r_l = p_l.add_run()
+    r_l.add_picture(str(LOGO_GLS_A), width=Inches(2.5))
+    
+    p_r = c_right.paragraphs[0]
+    p_r.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    r_r = p_r.add_run()
+    r_r.add_picture(str(LOGO_GLS_100), width=Inches(2.5))
 
-add_hr()
-centre("PROJECT REPORT", 12, space_before=8, space_after=4)
-centre("222301906 – Practicals on Natural Language Processing", 13, bold=True, space_after=28)
-add_hr()
+centre("Faculty of Computer Applications & Information Technology", 15, bold=True, italic=True, space_before=24, space_after=4)
+centre("Integrated Master of Computer Applications – iMCA Programme", 14, bold=True, space_after=4)
+centre("Semester IX", 13, bold=True, space_after=20)
 
-centre('"TopicMatch: Intelligent Student Project Topic Recommendation', 16, bold=True, space_before=14, space_after=2, color=ACCENT)
-centre('and Novelty Verification System Using Natural Language Processing"', 16, bold=True, space_after=36, color=ACCENT)
+centre("Project Report for", 12, space_after=2)
+centre("222301906 Practicals on Natural Language Processing", 13, bold=True, space_after=24)
 
-# Student table
-tbl_cov = doc.add_table(rows=5, cols=3)
-tbl_cov.alignment = WD_TABLE_ALIGNMENT.CENTER
-headers = ["Role", "Name", "Enrolment No."]
-for i, h in enumerate(headers):
-    c = tbl_cov.rows[0].cells[i]
-    c.text = h
-    set_cell_bg(c, TBL_HEAD)
-    cell_font(c, bold=True, size=12, center=True)
+centre('“Student Project Topic Recommendation System”', 16, bold=True, space_before=8, space_after=32, color=ACCENT)
 
-rows_data = [
-    ("Student 1", "[Name]", "[Enrolment No.]"),
-    ("Student 2", "[Name]", "[Enrolment No.]"),
-    ("Student 3", "[Name]", "[Enrolment No.]"),
-    ("Guide / Faculty", "[Faculty Name]", "—"),
-]
-for row_d in rows_data:
-    r = tbl_cov.add_row().cells
-    for i, val in enumerate(row_d):
-        r[i].text = val
-        cell_font(r[i], size=12, center=True)
+centre("Submitted by:", 12, bold=True, space_after=4)
+centre("Group No: 10", 12, bold=True, space_after=6)
+centre("Samarth Bhatt, Enrolment No: 202202519010008", 12, space_after=2)
+centre("Vishal Suthar, Enrolment No: 202202519010088", 12, space_after=20)
 
-doc.add_paragraph().paragraph_format.space_after = Pt(12)
-centre(f"Group No. : [Enter Group Number]", 13, bold=True, space_before=10, space_after=4)
-centre("Date of Submission: 30 October 2026", 12, space_after=6)
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 2 — TABLE OF CONTENTS
-# ═══════════════════════════════════════════════════════════════════
-heading("Table of Contents", level=1, num="2.")
-toc_rows = [
-    ("1.", "Cover Page", "1"),
-    ("2.", "Table of Contents", "2"),
-    ("3.", "Problem Statement", "3"),
-    ("4.", "Dataset Description", "4"),
-    ("", "    4.1  Dataset Source", "4"),
-    ("", "    4.2  Number of Samples", "4"),
-    ("", "    4.3  Data Format and Normalized Schema", "5"),
-    ("", "    4.4  Example Data Samples", "5"),
-    ("5.", "Domain Coverage Analysis", "6"),
-    ("6.", "System Architecture", "7"),
-    ("", "    6.1  System Flow Diagram", "7"),
-    ("", "    6.2  Architectural Components", "8"),
-    ("7.", "Data Processing Workflow", "9"),
-    ("", "    7.1  Raw Text Ingestion & Cleaning", "9"),
-    ("", "    7.2  Tokenization", "9"),
-    ("", "    7.3  Stop-Word Removal", "9"),
-    ("", "    7.4  Stemming & Lemmatization", "9"),
-    ("", "    7.5  Hybrid Vectorization", "10"),
-    ("8.", "Model Architecture & Implementation", "11"),
-    ("", "    8.1  Software & Hardware Requirements", "11"),
-    ("", "    8.2  Libraries & NLP Ecosystem", "11"),
-    ("", "    8.3  Core Code Snippets", "12"),
-    ("", "    8.4  System Interface Screenshots", "13"),
-    ("9.", "Result Visualization & Empirical Evaluation", "14"),
-    ("", "    9.1  Ablation Comparison Table & Charts", "14"),
-    ("", "    9.2  Novelty Confusion Matrix", "15"),
-    ("", "    9.3  Threshold Calibration Curve", "16"),
-    ("10.", "Conclusion and Future Enhancements", "17"),
-    ("11.", "References", "17"),
+# ==========================================
+# 2. TABLE OF CONTENTS
+# ==========================================
+heading("Table of Contents", level=1, num="")
+toc_items = [
+    ("Cover Page", "1"),
+    ("Table of Contents", "2"),
+    ("1. Problem Statement", "3"),
+    ("2. Dataset Description", "3"),
+    ("    2.1 Dataset Source", "3"),
+    ("    2.2 Number of Samples", "3"),
+    ("    2.3 Data Format", "3"),
+    ("    2.4 Example Data", "4"),
+    ("3. System Architecture", "4"),
+    ("    3.1 Layered Architecture", "5"),
+    ("    3.2 System Flow Diagram", "6"),
+    ("4. Data Processing Workflow", "7"),
+    ("5. Model Architecture & Implementation", "8"),
+    ("    5.1 Software Requirements", "8"),
+    ("    5.2 Hardware Requirements", "8"),
+    ("    5.3 Model Selection and Architecture", "8"),
+    ("    5.4 Core Implementation Code", "9"),
+    ("    5.5 Screenshots of Implementation", "10"),
+    ("6. Result Visualization", "10"),
+    ("    6.1 Duplicate Detection Confusion Matrix", "11"),
+    ("    6.2 Performance Comparison", "11"),
+    ("    6.3 Threshold Analysis", "12"),
+    ("7. Conclusion", "12"),
 ]
-tbl_toc = doc.add_table(rows=len(toc_rows)+1, cols=3)
+tbl_toc = doc.add_table(rows=len(toc_items)+1, cols=2)
 tbl_toc.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, hdr in enumerate(["Sr.", "Section Title", "Page"]):
+for i, h in enumerate(["Section Title", "Page"]):
     c = tbl_toc.rows[0].cells[i]
-    c.text = hdr
-    set_cell_bg(c, TBL_HEAD)
-    cell_font(c, bold=True, size=11, center=True)
-for ri, (sr, title, pg) in enumerate(toc_rows, start=1):
-    cells = tbl_toc.rows[ri].cells
-    cells[0].text = sr
-    cells[1].text = title
-    cells[2].text = pg
-    for ci, c in enumerate(cells):
-        if ri % 2 == 0:
-            set_cell_bg(c, TBL_ALT)
-        cell_font(c, size=11, center=(ci != 1))
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=(i==1))
+for ri, (title, pg) in enumerate(toc_items, start=1):
+    r = tbl_toc.rows[ri].cells
+    r[0].text = title; r[1].text = pg
+    if ri % 2 == 0:
+        [set_cell_bg(r[j], TBL_ALT) for j in range(2)]
+    cell_font(r[0], size=11, center=False)
+    cell_font(r[1], size=11, center=True)
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 3 — PROBLEM STATEMENT
-# ═══════════════════════════════════════════════════════════════════
-heading("Problem Statement", level=1, num="3.")
+# ==========================================
+# 1. PROBLEM STATEMENT
+# ==========================================
+heading("Problem Statement", level=1, num="1.")
 body(
-    "In academic institutions, capstone and final-year student project allocation suffers from severe structural challenges. "
-    "Students repeatedly propose projects that closely duplicate previous years' repositories — such as generic attendance systems, "
-    "e-commerce storefronts, or standard sentiment analyzers — leading to stagnation in research originality and diminishing learning outcomes. "
-    "Simultaneously, academic supervisors and faculty are burdened with manually vetting dozens of project abstracts without any automated "
-    "tooling to verify novelty against departmental historical archives, assess technical feasibility against student competency levels, or "
-    "ensure alignment with prescribed semester completion timelines."
+    "Every year, final-year students must choose a project topic, and the approval process for these topics is largely manual. "
+    "In practice, this creates three recurring problems:"
 )
+bullet("Many students choose the same or very similar topics, often worded differently, so teachers must check for duplicates manually in spreadsheets.")
+bullet("Students do not know which topics are unique, which match their interests, or which are realistic for their skills and available time.")
+bullet("Topic approval is slow and unfair when there is no clear first-come priority.")
+
 body(
-    "Existing academic tools either depend entirely on simplistic surface-level keyword matching — which fails catastrophically when identical "
-    "concepts are expressed using varied vocabulary or paraphrasing — or lack multi-criteria decision models that factor in student skills, "
-    "time allocations, and team capacity. There is a definitive need for an enterprise-grade Natural Language Processing (NLP) framework "
-    "that unifies semantic dense embeddings, lexical information retrieval, automated corpus ingestion, and multi-factor feasibility scoring "
-    "into a unified, production-quality academic intelligence platform."
+    "Objective. Build a web system that uses Natural Language Processing to:\n"
+    "1. recommend the most relevant topics from past projects for a student's interests;\n"
+    "2. score each topic for novelty (how unique it is) and feasibility (whether the team can build it);\n"
+    "3. detect duplicate or similar proposals by meaning rather than by matching words; and\n"
+    "4. manage the proposal workflow: a student submits a proposal, a teacher approves or rejects it, and approved topics are hidden from other students."
+)
+body("Users: Student, Teacher, and Supervisor.", bold_prefix="")
+
+# ==========================================
+# 2. DATASET DESCRIPTION
+# ==========================================
+heading("Dataset Description", level=1, num="2.")
+
+heading("2.1 Dataset Source", level=2, num="")
+body(
+    "The dataset is a manually curated corpus of past student projects in the GLS University style, covering the IMCA, BCA and MCA "
+    "departments for the years 2021 to 2024. It is stored in backend/data/sample_corpus.json. The corpus was not downloaded from an external website; "
+    "the entries were written and collected by the project team. A second file, topics.json, holds a list of 150 topics used for the domain overview. "
+    "Additionally, dynamic teacher ingestion allows faculty to upload CSV, TXT, PDF, and DOCX records directly into the live corpus."
 )
 
-heading("Core Objectives of the Project", level=2, num="")
-numbered(
-    "To develop a semantic recommendation engine using Sentence-BERT (all-mpnet-base-v2) and FAISS vector indexing "
-    "to recommend high-impact, tailor-made project topics that precisely match individual student interests, domain preferences, and declared skills.",
-    "1", bold_prefix="Semantic Topic Matching: "
-)
-numbered(
-    "To implement an automated semantic duplicate detection pipeline comparing incoming project abstracts against historical "
-    "department archives, outputting an exact Novelty Score and categorizing submissions into Novel, Borderline, or Duplicate with "
-    "supervisor-review flagging for high-similarity proposals.",
-    "2", bold_prefix="Novelty & Plagiarism Verification: "
-)
-numbered(
-    "To formulate a multi-criteria feasibility assessment engine using configurable YAML-driven rules, weighing Student Skill Match (50%), "
-    "Time Budget Realism (30%), and Team Capacity Factor (20%), with prerequisite gap deduction penalties.",
-    "3", bold_prefix="Multi-Criteria Feasibility Scoring: "
-)
-numbered(
-    "To build a dynamic supervisor data ingestion pipeline supporting heterogeneous formats (.csv, .txt, .pdf, .docx, .json) with "
-    "rule-based NLP entity extraction, canonical technology tagging via a curated TAG_LIST, deduplication, and real-time FAISS index hot-reloading.",
-    "4", bold_prefix="Dynamic Ingestion & Scalability: "
-)
-numbered(
-    "To provide full reproducibility of all reported evaluation metrics via a committed 50-query labelled benchmark dataset and a "
-    "single-command evaluation script supporting ablation modes (TF-IDF, BM25, SBERT, Hybrid).",
-    "5", bold_prefix="Reproducible Evaluation Suite: "
-)
-doc.add_page_break()
-
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 4-5 — DATASET DESCRIPTION
-# ═══════════════════════════════════════════════════════════════════
-heading("Dataset Description", level=1, num="4.")
-
-heading("4.1 Dataset Source", level=2, num="")
+heading("2.2 Number of Samples", level=2, num="")
 body(
-    "The TopicMatch platform relies on an academic historical project corpus curated from multiple authoritative sources. "
-    "The primary corpus is built from institutional graduation archives of GLS University — encompassing iMCA, MCA, and "
-    "B.Tech (CSE/IT) disciplines across academic cycles 2021 to 2024. This was augmented with verified open-source capstone "
-    "datasets sourced from IEEE Xplore, Kaggle's competition project descriptions, and national student project registries. "
-    "Additionally, the Supervisor Dashboard enables ongoing dynamic file uploads — allowing faculty coordinators to continuously "
-    "ingest student submission lists in batch formats (CSV, TXT, PDF, DOCX) directly into the active knowledge base."
-)
-body(
-    "Ground truth for the 50-query evaluation benchmark was manually labelled by Samarth Patel and Vishal Suthar "
-    "(GLS University, October 2026) by independently mapping each query to its most semantically similar corpus entry "
-    "in sample_corpus.json, reconciled via majority vote where the two annotators disagreed. "
-    "The annotation process took approximately 6 hours across two sessions."
+    "The historical corpus contains 120 verified project records (expandable to 132+ via teacher upload batches). Each record is embedded "
+    "as one vector in the FAISS index used for similarity search, so every recommendation and duplicate check is computed against these entries. "
+    "The separate topics.json file adds 150 topic entries for the domain overview. In addition, a gold-standard benchmark of 50 labelled queries "
+    "is committed for reproducible evaluation."
 )
 
-heading("4.2 Number of Samples", level=2, num="")
-tbl_ds = doc.add_table(rows=4, cols=3)
-tbl_ds.alignment = WD_TABLE_ALIGNMENT.CENTER
-ds_hdrs = ["Dataset Split", "Size", "Purpose"]
-for i, h in enumerate(ds_hdrs):
-    c = tbl_ds.rows[0].cells[i]
-    c.text = h
-    set_cell_bg(c, TBL_HEAD)
-    cell_font(c, bold=True, size=11, center=True)
-ds_data = [
-    ("Core Historical Corpus", "132 projects", "Recommendation candidate pool and novelty reference archive"),
-    ("Gold Evaluation Benchmark", "50 labelled queries", "Reproducible Precision@1, Recall@5, MRR measurement"),
-    ("Teacher Upload Test Batches", "27 projects (CSV+TXT)", "Live ingest pipeline validation and schema normalization testing"),
+heading("2.3 Data Format", level=2, num="")
+body(
+    "Each corpus record is stored as JSON and validated against a Pydantic schema named ProjectEntry. Table 2.1 lists the fields. "
+    "Students, teachers and supervisors are stored in the same SQL database together with their project proposals."
+)
+
+body("Table 2.1: ProjectEntry schema", bold_prefix="")
+schema_entries = [
+    ("id", "string", "Unique identifier, for example gls-2023-001"),
+    ("title", "string", "Project title"),
+    ("abstract", "string", "Summary of 1 to 3 sentences"),
+    ("year", "int", "Year of the project (2021-2024)"),
+    ("department", "string", "IMCA / BCA / MCA"),
+    ("tech_stack_tags", "list[str]", "Drawn from fixed list of 20 canonical tags (python, react, nlp, ...)"),
+    ("domain_tags", "list[str]", "Domain labels, for example hr-tech, nlp, cv, cybersecurity"),
+    ("language", "string", "en"),
 ]
-for ri, (a, b, c_t) in enumerate(ds_data, 1):
-    row = tbl_ds.rows[ri].cells
-    row[0].text = a; row[1].text = b; row[2].text = c_t
+tbl_pe = doc.add_table(rows=len(schema_entries)+1, cols=3)
+tbl_pe.alignment = WD_TABLE_ALIGNMENT.CENTER
+for i, h in enumerate(["Field", "Type", "Meaning"]):
+    c = tbl_pe.rows[0].cells[i]
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=(i<2))
+for ri, (f, t, m) in enumerate(schema_entries, 1):
+    r = tbl_pe.rows[ri].cells
+    r[0].text = f; r[1].text = t; r[2].text = m
     if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(3)]
-    [cell_font(row[j], size=11) for j in range(3)]
-doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        [set_cell_bg(r[j], TBL_ALT) for j in range(3)]
+    cell_font(r[0], size=10.5, center=True)
+    cell_font(r[1], size=10.5, center=True)
+    cell_font(r[2], size=10.5, center=False)
 
-heading("4.3 Data Format and Normalized Schema", level=2, num="")
-body(
-    "All ingested projects — regardless of source file format — are normalized into a strict, validated ProjectEntry schema "
-    "before serialization into the persistent JSON repository (sample_corpus.json) and relational database (SQLite / PostgreSQL). "
-    "This guarantees uniform field semantics across all data sources and prevents index corruption."
-)
-schema_f = [
-    ("id",           "String (Unique Key)",    "Auto-generated key formatted as gls-YYYY-NNN (archive) or up-YYYY-NNN (uploaded)."),
-    ("title",        "String (Mandatory)",      "Full academic title of the capstone project."),
-    ("abstract",     "String (Mandatory)",      "Dense technical description covering problem scope, methodology, and intended outcomes."),
-    ("technologies", "List[String]",            "Canonical technology tags mapped against the master TAG_LIST (e.g., python, bert, react, fastapi)."),
-    ("domain",       "String",                  "Primary academic discipline (e.g., NLP, Computer Vision, Cybersecurity, IoT)."),
-    ("year",         "Integer",                 "Academic graduation year of the original submission (e.g., 2021 through 2024)."),
-    ("department",   "String",                  "Submitting faculty or department code (e.g., FCAIT – iMCA, Computer Applications)."),
-]
-tbl_s = doc.add_table(rows=len(schema_f)+1, cols=3)
-tbl_s.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Field Name", "Data Type", "Semantic Description"]):
-    c = tbl_s.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-for ri, (f, t, d) in enumerate(schema_f, 1):
-    row = tbl_s.rows[ri].cells
-    row[0].text = f; row[1].text = t; row[2].text = d
-    if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(3)]
-    [cell_font(row[j], size=11) for j in range(3)]
-doc.add_paragraph().paragraph_format.space_after = Pt(4)
-
-heading("4.4 Example Data Samples", level=2, num="")
-body("Representative JSON records from the active historical corpus (sample_corpus.json):")
+heading("2.4 Example Data", level=2, num="")
+body("Table 2.2 shows one record from the corpus in its stored JSON form:")
 code_block(
-    '[\n'
-    '  {\n'
-    '    "id": "gls-2023-001",\n'
-    '    "title": "AI-Based Resume Screening Tool",\n'
-    '    "abstract": "A system that screens and ranks resumes against job descriptions using TF-IDF\n'
-    '                 and BERT embeddings. Evaluates candidate suitability and outputs ranked scores.",\n'
-    '    "technologies": ["python", "nlp", "bert", "scikit-learn", "fastapi"],\n'
-    '    "domain": "Natural Language Processing",\n'
-    '    "year": 2023,\n'
-    '    "department": "FCAIT - iMCA"\n'
-    '  },\n'
-    '  {\n'
-    '    "id": "gls-2023-014",\n'
-    '    "title": "Sign Language Recognition System",\n'
-    '    "abstract": "Recognizes ASL gestures in real time using MediaPipe landmarks and an LSTM\n'
-    '                 sequence classifier, producing textual translations.",\n'
-    '    "technologies": ["python", "opencv", "tensorflow", "lstm", "mediapipe"],\n'
-    '    "domain": "Computer Vision",\n'
-    '    "year": 2023,\n'
-    '    "department": "FCAIT - iMCA"\n'
-    '  }\n'
-    ']'
+'{\n'
+'  "id": "gls-2023-001",\n'
+'  "title": "AI-Based Resume Screening Tool",\n'
+'  "abstract": "A system that screens resumes against job descriptions using\n'
+'               sentence embeddings and cosine similarity to automatically rank\n'
+'               candidates by fit score.",\n'
+'  "year": 2023,\n'
+'  "department": "IMCA",\n'
+'  "tech_stack_tags": ["python", "nlp", "flask"],\n'
+'  "domain_tags": ["hr-tech", "nlp"],\n'
+'  "language": "en"\n'
+'}'
 )
+body(
+    "The model reads only the title and abstract as text. The tags are used for feasibility rules and for evaluation."
+)
+
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 6 — DOMAIN COVERAGE
-# ═══════════════════════════════════════════════════════════════════
-heading("Domain Coverage Analysis", level=1, num="5.")
+# ==========================================
+# 3. SYSTEM ARCHITECTURE
+# ==========================================
+heading("System Architecture", level=1, num="3.")
 body(
-    "The 132 historical projects are distributed across 10 distinct technical domains, ensuring comprehensive coverage of modern "
-    "computer science disciplines. The pie chart below illustrates the proportional distribution:"
+    "TopicMatch follows a decoupled, multi-tier architecture. A Python FastAPI backend serves the REST API, an in-memory "
+    "FAISS index handles vector search, a rule-based feasibility engine scores each candidate topic, and a React client "
+    "provides the user interface for students, teachers and supervisors."
 )
-insert_image(ASSETS / "chart_domain_pie.png", width_in=5.8,
-             caption="Figure 5.1 — Domain Distribution Across 132 Historical Capstone Projects")
 
-tbl_dom = doc.add_table(rows=6, cols=4)
-tbl_dom.alignment = WD_TABLE_ALIGNMENT.CENTER
-dom_data = [
-    ("Natural Language Processing", "18", "Computer Vision", "16"),
-    ("Machine Learning", "15", "Data Science", "15"),
-    ("Web Development", "14", "Healthcare AI", "12"),
-    ("Cybersecurity", "11", "Blockchain", "12"),
-    ("IoT / Embedded", "9", "AR / VR", "8"),
+heading("3.1 Layered Architecture", level=2, num="")
+body(
+    "Figure 3.1 shows the system organised into three layers: a presentation layer, an application layer and a data layer."
+)
+
+if FIG_ARCH.exists():
+    insert_image(FIG_ARCH, width_in=5.8,
+                 caption="Figure 3.1: System architecture (UML component diagram)")
+
+body(
+    "Presentation layer. The React frontend, built with Vite, provides the login, signup and password-reset pages, along with "
+    "the student, teacher and supervisor dashboards. Role-based routing is handled by an AuthContext and a ProtectedRoute component."
+)
+body(
+    "Application layer. The FastAPI backend exposes the authentication, recommendation, proposal and supervisor endpoints. Passwords "
+    "are hashed with bcrypt, access is controlled with JWT tokens, and request data is validated with Pydantic schemas."
+)
+body(
+    "Data layer. Three components sit beneath the application layer: a relational database (SQLite for development and PostgreSQL "
+    "under Docker) accessed through SQLAlchemy, the NLP pipeline that performs SBERT embedding and FAISS search, and the feasibility "
+    "engine, which applies rules from a configuration file without machine learning."
+)
+
+heading("3.2 System Flow Diagram", level=2, num="")
+body(
+    "Figure 3.2 traces the flow of work across the three actors: the student, the system, and the teacher."
+)
+
+if FIG_FLOW.exists():
+    insert_image(FIG_FLOW, width_in=5.2,
+                 caption="Figure 3.2: System flow (UML activity diagram)")
+
+body(
+    "Student path. After signing up or logging in, the student enters their interests, tech stack, team size and available weeks. "
+    "The system validates the JWT token and input, embeds the interest text with SBERT, runs a FAISS cosine search over the 120 corpus "
+    "vectors, and keeps the top 20 candidates. Each candidate is scored for relevance, novelty and feasibility and ranked. "
+    "Any candidate that is too similar to an already approved topic (cosine similarity of at least 0.82) is removed. The remaining top "
+    "five are returned with an explanation and a list of missing skills. The student can then choose one of these topics or write a "
+    "custom topic, and submit it as a proposal with status PENDING."
+)
+body(
+    "Teacher path. The teacher opens the pending proposals, oldest first. The system runs the duplicate detector, which embeds the "
+    "titles and compares them by cosine similarity. Pairs with a similarity of at least 0.75 are flagged, and pairs at or above 0.88 "
+    "are marked HIGH. The teacher then approves or rejects the proposal. An approval sets the status to APPROVED, automatically rejects "
+    "the same student's other pending proposals, and marks the title as taken so it is hidden from all other students. A rejection sets "
+    "the status to REJECTED and records the teacher's notes. The student can see the outcome and, if rejected, resubmit."
+)
+
+doc.add_page_break()
+
+# ==========================================
+# 4. DATA PROCESSING WORKFLOW
+# ==========================================
+heading("Data Processing Workflow", level=1, num="4.")
+body(
+    "Table 4.1 summarises the processing applied to the text, from raw input to the vector index. Because the system uses a "
+    "transformer model, the pipeline is deliberately lighter than classical NLP pipelines."
+)
+
+body("Table 4.1: Data processing pipeline", bold_prefix="")
+proc_table = [
+    ("1. Raw text", "For the corpus, the input is title + \". \" + abstract. For queries, it is the student's interest text."),
+    ("2. Tokenization", "The model's own WordPiece sub-word tokenizer, inside SentenceTransformers, splits the text into tokens. Example: \"I want to build a chatbot for students using Python\" becomes i, want, to, build, a, chat, ##bot, for, students, using, python."),
+    ("3. Stop-word removal", "Not applied. Transformer models rely on full sentence context, and words such as \"for\" and \"using\" carry meaning. Removing them reduces quality. English stop-word removal is used only in the lexical TF-IDF baseline (Section 6)."),
+    ("4. Stemming / lemmatization", "Not required. Sub-word tokens and contextual embeddings already place forms such as recommend, recommendation and recommending close together in vector space."),
+    ("5. Vectorization", "The MPNet transformer outputs a 768-dimension vector for the whole sentence, using mean pooling."),
+    ("6. Normalization", "Vectors are L2-normalized, so the dot product equals cosine similarity."),
+    ("7. Indexing", "Vectors are stored in a FAISS IndexFlatIP index, and search returns the top-k nearest neighbours."),
 ]
-hdrs = ["Domain", "Projects", "Domain", "Projects"]
-for i, h in enumerate(hdrs):
-    c = tbl_dom.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-for ri, (d1, n1, d2, n2) in enumerate(dom_data, 1):
-    row = tbl_dom.rows[ri].cells
-    row[0].text = d1; row[1].text = n1; row[2].text = d2; row[3].text = n2
+tbl_proc = doc.add_table(rows=len(proc_table)+1, cols=2)
+tbl_proc.alignment = WD_TABLE_ALIGNMENT.CENTER
+for i, h in enumerate(["Step", "What happens in TopicMatch"]):
+    c = tbl_proc.rows[0].cells[i]
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=(i==0))
+for ri, (st, desc) in enumerate(proc_table, 1):
+    r = tbl_proc.rows[ri].cells
+    r[0].text = st; r[1].text = desc
     if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(4)]
-    [cell_font(row[j], size=11, center=(j%2==1)) for j in range(4)]
+        [set_cell_bg(r[j], TBL_ALT) for j in range(2)]
+    cell_font(r[0], size=10.5, center=True)
+    cell_font(r[1], size=10.5, center=False)
+
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 7-8 — SYSTEM ARCHITECTURE
-# ═══════════════════════════════════════════════════════════════════
-heading("System Architecture", level=1, num="6.")
-body(
-    "TopicMatch adopts a decoupled, modern multi-tier micro-service architecture. A high-performance Python FastAPI backend "
-    "exposes RESTful endpoints consumed by a React 18 client. An asynchronous FAISS vector indexing engine handles all dense "
-    "semantic search, while a BM25 inverted index handles lexical recall. A YAML-driven multi-criteria scoring engine ranks "
-    "candidates by composite relevance, novelty, and feasibility. The architecture guarantees sub-100 ms search latencies "
-    "while maintaining strict data consistency across dynamic corpus updates."
-)
+# ==========================================
+# 5. MODEL ARCHITECTURE & IMPLEMENTATION
+# ==========================================
+heading("Model Architecture & Implementation", level=1, num="5.")
 
-heading("6.1 System Flow Diagram", level=2, num="")
-body("The end-to-end execution flow from user request to ranked recommendation output is illustrated below:")
-code_block(
-"  Student Browser              Teacher / Supervisor Browser\n"
-"       |                               |\n"
-"   [React UI]                     [React UI]\n"
-"  Interests · Skills          Upload CSV/PDF/TXT\n"
-"  Proposed Abstract            Review Proposals\n"
-"       |                               |\n"
-"       +----------[FastAPI Gateway]----+\n"
-"                        |\n"
-"           +------------+-------------+\n"
-"           |                          |\n"
-"   [Recommendation Engine]   [Ingest Pipeline]\n"
-"   SBERT Embedding (768d)    Parse -> Tag -> Dedup\n"
-"   L2 Normalize              Update JSON + DB\n"
-"   FAISS IndexFlatIP         Hot-Reload FAISS\n"
-"   BM25 Okapi Lookup              |\n"
-"           |               [SQLite / PostgreSQL]\n"
-"   [Scoring Engine (YAML)]\n"
-"   Final = 0.60*Rel + 0.20*Nov + 0.20*Feas\n"
-"           |\n"
-"   Ranked Topics + Novelty Alerts -> Student/Supervisor"
-)
+heading("5.1 Software Requirements", level=2, num="")
+body("Table 5.1 lists the software stack used in the implementation.")
 
-heading("6.2 Core Architectural Modules", level=2, num="")
-modules = [
-    ("FastAPI REST Gateway",
-     "Exposes all endpoints with automatic OpenAPI documentation, JWT Bearer authentication, CORS middleware, "
-     "and SQLAlchemy dependency-injected database sessions. Startup hook calls create_all() to auto-migrate DB schema."),
-    ("Dense Semantic Engine (SBERT + FAISS)",
-     "Loads sentence-transformers/all-mpnet-base-v2 (768-dimensional output). Project abstracts are encoded in batch, "
-     "L2-normalized, and indexed into a FAISS IndexFlatIP for exact inner-product (cosine) similarity search. The index "
-     "is maintained in memory and hot-reloaded atomically after each corpus update."),
-    ("Lexical Retrieval Engine (BM25 Okapi)",
-     "Provides term-frequency saturation with document-length penalization using the rank-bm25 library. Handles "
-     "domain-specific acronyms and technical keywords that SBERT may underweight."),
-    ("Feasibility Rule Engine (rules.yaml)",
-     "YAML-configurable scoring weights: Skill Match 0.50, Time Budget 0.30, Team Factor 0.20. Evaluates candidate "
-     "project execution viability against student-declared skills, weekly hours, and team size with prerequisite deductions."),
-    ("Multi-Format Ingest & Hot-Reload Controller",
-     "Parses CSV, TXT, PDF, and DOCX uploads. Applies canonical NLP tagging, title-normalized deduplication against "
-     "existing corpus, writes to sample_corpus.json and the DB's CorpusProject table, then triggers an atomic in-memory "
-     "FAISS index rebuild without service restart."),
-]
-for title, desc in modules:
-    bullet(desc, bold_prefix=title + ": ")
-doc.add_page_break()
-
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 9-10 — DATA PROCESSING WORKFLOW
-# ═══════════════════════════════════════════════════════════════════
-heading("Data Processing Workflow", level=1, num="7.")
-body(
-    "TopicMatch applies a rigorous, multi-phase NLP preprocessing pipeline to transform raw, unstructured text — whether "
-    "from student interest forms, PDF uploads, or CSV batch submissions — into consistent, high-quality semantic representations "
-    "suitable for FAISS vector search and BM25 lexical indexing. The five stages are described below:"
-)
-
-steps = [
-    ("7.1 Raw Text Ingestion & Cleaning",
-     "Input text is extracted from source files, stripped of HTML tags, special characters, punctuation sequences, "
-     "control characters, and irregular whitespace. Unicode text is normalized (NFC form). All characters are lowercased "
-     "to ensure case-insensitive matching. For PDF files, page-level text blocks are extracted using pypdf and concatenated "
-     "before cleaning. CSV and TXT files are read with UTF-8-sig encoding to handle BOM markers."),
-    ("7.2 Tokenization",
-     "The cleaned text is tokenized into atomic linguistic units. In the dense (SBERT) branch, the model's internal "
-     "WordPiece / Byte-Pair tokenizer is used, effectively handling domain-specific jargon, compound technical terms, "
-     "and out-of-vocabulary acronyms without truncation. In the lexical branch (BM25 / TF-IDF), regex boundary tokenization "
-     "splits on [A-Za-z0-9_-]+ word boundaries to extract individual tokens."),
-    ("7.3 Stop-Word Removal",
-     "Standard English stop-words (e.g., 'the', 'is', 'at', 'which', 'and', 'of') are filtered from the lexical token "
-     "vocabulary using sklearn's built-in stop-word corpus. Context-sensitive academic qualifiers such as 'not', 'system', "
-     "'detection', 'framework', 'using', and 'based' are deliberately preserved to avoid loss of critical technical context. "
-     "Note: The SBERT dense branch inherently handles stop-words through attention masking and does not apply this filter."),
-    ("7.4 Stemming & Lemmatization",
-     "Lexical tokens undergo morphological normalization to their canonical base lemma. For example: 'classifying', "
-     "'classification', 'classified' are all reduced to 'classify'. This prevents vocabulary fragmentation and ensures "
-     "that student queries written in different grammatical tenses or morphological forms match the same historical projects. "
-     "Porter Stemming is applied in the TF-IDF branch; BM25 uses the raw lowercased tokens by default."),
-    ("7.5 Hybrid Dual Vectorization",
-     "After preprocessing, text is vectorized through two complementary pipelines operating in parallel:\n\n"
-     "  a) Dense Semantic Vectorization: The processed text (or the original cleaned text for SBERT) is passed through "
-     "all-mpnet-base-v2, producing a 768-dimensional contextual float32 vector that encodes semantic meaning, conceptual "
-     "relationships, and intent. All vectors are L2-normalized to unit length, enabling exact Cosine Similarity computation "
-     "via inner product in FAISS IndexFlatIP.\n\n"
-     "  b) Sparse Lexical Vectorization: The corpus is simultaneously indexed using BM25 Okapi, which assigns each term "
-     "a weight based on its frequency within the document (TF) relative to its prevalence across all documents (IDF). "
-     "This efficiently surface exact keyword matches, technical acronyms, and rare domain terms that dense models may diffuse."),
-]
-for title, desc in steps:
-    heading(title, level=2, num="")
-    body(desc)
-doc.add_page_break()
-
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 11-13 — MODEL ARCHITECTURE & IMPLEMENTATION
-# ═══════════════════════════════════════════════════════════════════
-heading("Model Architecture & Implementation", level=1, num="8.")
-
-heading("8.1 Software & Hardware Requirements", level=2, num="")
-req_data = [
-    ("CPU", "Intel Core i5/i7/i9 or AMD Ryzen 5/7/9 (4+ cores, 64-bit)"),
-    ("RAM", "Minimum 8 GB (16 GB recommended for concurrent SBERT + FAISS)"),
-    ("GPU", "Not required (FAISS IndexFlatIP runs entirely on CPU)"),
-    ("Storage", "≥ 1 GB for Python venv, pre-trained model weights, and DB"),
-    ("OS", "Windows 10/11 (64-bit), Ubuntu 20.04+, or macOS 12+"),
-    ("Python", "3.10 or 3.11 (64-bit CPython)"),
-    ("Node.js", "v18+ with npm v9+ (for React frontend)"),
-    ("Database", "SQLite 3 (development) / PostgreSQL 14+ (production)"),
-]
-tbl_r = doc.add_table(rows=len(req_data)+1, cols=2)
-tbl_r.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Component", "Specification"]):
-    c = tbl_r.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-for ri, (comp, spec) in enumerate(req_data, 1):
-    row = tbl_r.rows[ri].cells
-    row[0].text = comp; row[1].text = spec
-    if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(2)]
-    [cell_font(row[j], size=11) for j in range(2)]
-doc.add_paragraph().paragraph_format.space_after = Pt(4)
-
-heading("8.2 Libraries & NLP Ecosystem", level=2, num="")
-lib_data = [
-    ("Backend Framework", "fastapi, uvicorn[standard], starlette, pydantic v2"),
-    ("Dense NLP / Embeddings", "sentence-transformers (all-mpnet-base-v2), torch"),
-    ("Vector Index", "faiss-cpu 1.7.4+"),
-    ("Lexical Retrieval", "rank-bm25, scikit-learn (TF-IDF + cosine similarity)"),
+body("Table 5.1: Software requirements", bold_prefix="")
+soft_req = [
+    ("Language", "Python 3.11 / 3.13, JavaScript (Node 18+)"),
+    ("NLP / ML libraries", "sentence-transformers 3.x, PyTorch 2.x, FAISS-cpu 1.7.4+, NumPy, scikit-learn (evaluation only), rank-bm25"),
+    ("Backend", "FastAPI 0.111+, Uvicorn, SQLAlchemy 2.0, Pydantic v2, python-jose (JWT), bcrypt, PyYAML"),
     ("Document Ingestion", "pypdf, python-docx, python-multipart"),
-    ("Database ORM", "sqlalchemy, alembic (migrations)"),
-    ("Auth & Security", "passlib[bcrypt], python-jose[cryptography]"),
-    ("Frontend", "React 18, Vite 5, Tailwind CSS 3, lucide-react"),
-    ("Testing", "pytest, pytest-asyncio, httpx (11/11 tests passing)"),
-    ("Visualization (Eval)", "matplotlib, seaborn, numpy, pandas"),
+    ("Database", "SQLite (development), PostgreSQL (Docker)"),
+    ("Frontend", "React 18, Vite, React Router, Tailwind CSS, Lucide React"),
+    ("Tools & Eval", "Docker Compose, Git / GitHub, pytest, matplotlib, seaborn"),
 ]
-tbl_l = doc.add_table(rows=len(lib_data)+1, cols=2)
-tbl_l.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Category", "Libraries / Packages"]):
-    c = tbl_l.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-for ri, (cat, pkg) in enumerate(lib_data, 1):
-    row = tbl_l.rows[ri].cells
-    row[0].text = cat; row[1].text = pkg
+tbl_sr = doc.add_table(rows=len(soft_req)+1, cols=2)
+tbl_sr.alignment = WD_TABLE_ALIGNMENT.CENTER
+for i, h in enumerate(["Component", "Technology used"]):
+    c = tbl_sr.rows[0].cells[i]
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=(i==0))
+for ri, (cp, tech) in enumerate(soft_req, 1):
+    r = tbl_sr.rows[ri].cells
+    r[0].text = cp; r[1].text = tech
     if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(2)]
-    [cell_font(row[j], size=11) for j in range(2)]
-doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        [set_cell_bg(r[j], TBL_ALT) for j in range(2)]
+    cell_font(r[0], size=10.5, center=True)
+    cell_font(r[1], size=10.5, center=False)
 
-heading("8.3 Core Implementation Code Snippets", level=2, num="")
-
-body("Snippet 1: FAISS Index Construction with L2 Normalization (ml/index.py)", bold_prefix="")
-code_block(
-"class FaissIndexWrapper:\n"
-"    def __init__(self, model_name: str = 'all-mpnet-base-v2'):\n"
-"        self.model = SentenceTransformer(model_name)\n"
-"        self.dimension = 768\n"
-"        self.index = faiss.IndexFlatIP(self.dimension)  # Inner Product for cosine sim\n"
-"        self.entries: list[ProjectEntry] = []\n\n"
-"    def build(self, corpus: list[ProjectEntry]):\n"
-"        self.entries = corpus\n"
-"        texts = [f\"{e.title}. {e.abstract}\" for e in corpus]\n"
-"        embeddings = self.model.encode(texts, convert_to_numpy=True,\n"
-"                                       batch_size=32, show_progress_bar=False)\n"
-"        faiss.normalize_L2(embeddings)   # In-place L2 normalization -> cosine via IP\n"
-"        self.index.reset()\n"
-"        self.index.add(embeddings)\n\n"
-"    def search(self, query: str, top_k: int = 5) -> list[SearchResult]:\n"
-"        q_vec = self.model.encode([query], convert_to_numpy=True)\n"
-"        faiss.normalize_L2(q_vec)\n"
-"        scores, indices = self.index.search(q_vec, top_k)\n"
-"        return [SearchResult(entry=self.entries[i], score=float(s))\n"
-"                for s, i in zip(scores[0], indices[0]) if i >= 0]"
+heading("5.2 Hardware Requirements", level=2, num="")
+body(
+    "The system is designed to run on standard CPU hardware. The embedding model performs inference only and was not trained "
+    "by the team, so no GPU is required and no training hardware is needed. Corpus vectors are small enough to be held in memory "
+    "by the FAISS flat index (approx. 400 KB for 132 projects). Recommended system memory is 8 GB to 16 GB RAM."
 )
 
-body("Snippet 2: Multi-Signal Composite Ranking (pipeline/recommend.py)", bold_prefix="")
-code_block(
-"def rank_candidates(query: RecommendRequest, candidates: list[SearchResult],\n"
-"                    bm25_index, all_entries: list[ProjectEntry]) -> list[dict]:\n"
-"    bm25_scores = _normalize_bm25(bm25_index.get_scores(query.interests.split()))\n"
-"    results = []\n"
-"    for i, cand in enumerate(candidates):\n"
-"        dense_sim   = float(cand.score)            # Already cosine (FAISS inner product)\n"
-"        bm25_sim    = float(bm25_scores[i])\n"
-"        relevance   = 0.70 * dense_sim + 0.30 * bm25_sim\n\n"
-"        max_dup_sim = _max_similarity_against_corpus(cand.entry.abstract, all_entries)\n"
-"        novelty     = max(0.0, 1.0 - max_dup_sim)\n\n"
-"        feasibility = compute_feasibility(cand.entry, query)  # rules.yaml engine\n\n"
-"        final_score = 0.60 * relevance + 0.20 * novelty + 0.20 * feasibility\n"
-"        results.append({**cand.entry.dict(), 'final_score': round(final_score, 4),\n"
-"                         'novelty_score': round(novelty, 4),\n"
-"                         'feasibility_score': round(feasibility, 4)})\n"
-"    return sorted(results, key=lambda x: x['final_score'], reverse=True)"
+heading("5.3 Model Selection and Architecture", level=2, num="")
+body(
+    "The system uses the pre-trained sentence-transformers model all-mpnet-base-v2, applied through transfer learning. "
+    "It produces a 768-dimension sentence vector and is used only for inference. The model was chosen because it captures meaning "
+    "and synonyms, runs efficiently on CPU, and is significantly more accurate than smaller MiniLM variants. Similarity is computed "
+    "as cosine similarity over L2-normalised vectors, and the same model is used for recommendation, novelty scoring and duplicate "
+    "detection so that all three rely on a single consistent representation of meaning."
 )
 
-body("Snippet 3: Dynamic Multi-Format Ingest with Auto-Tagging (data/ingest.py)", bold_prefix="")
-code_block(
-"def extract_canonical_tags(text: str) -> tuple[list[str], str]:\n"
-"    text_lower = text.lower()\n"
-"    matched = []\n"
-"    for tag, meta in CANONICAL_TAGS.items():\n"
-"        for syn in meta['synonyms']:\n"
-"            if re.search(r'\\b' + re.escape(syn) + r'\\b', text_lower):\n"
-"                matched.append(tag)\n"
-"                break\n"
-"    domain = detect_domain_from_keywords(text_lower)\n"
-"    return list(set(matched)), domain\n\n"
-"def preprocess_upload(content: bytes, filename: str) -> list[ProjectEntry]:\n"
-"    ext = Path(filename).suffix.lower()\n"
-"    raw_records = (\n"
-"        _parse_csv(content)  if ext == '.csv'  else\n"
-"        _parse_txt(content)  if ext == '.txt'  else\n"
-"        _parse_pdf(content)  if ext == '.pdf'  else\n"
-"        _parse_docx(content) if ext == '.docx' else []\n"
-"    )\n"
-"    return [_normalize(r) for r in raw_records if r.get('title')]"
+heading("5.4 Core Implementation Code", level=2, num="")
+body(
+    "The excerpts below are representative of the core pipeline described in Sections 3.2 and 4. They reproduce the embedding, "
+    "indexing, ranking and duplicate-detection logic in simplified form."
 )
 
-body("Snippet 4: Feasibility Scoring (scoring/feasibility.py)", bold_prefix="")
+body("Excerpt 1: Embedding and FAISS indexing", bold_prefix="")
 code_block(
-"def compute_feasibility(project: ProjectEntry, request: RecommendRequest) -> float:\n"
-"    weights = load_weights()  # From rules.yaml: {skill: 0.50, time: 0.30, team: 0.20}\n"
-"    skill_score = _skill_overlap(project.technologies, request.skills)\n"
-"    prereq_pen  = _prerequisite_gap_penalty(project.technologies, request.skills)\n"
-"    time_score  = _time_budget_score(project.domain, request.hours_per_week,\n"
-"                                     request.weeks_available)\n"
-"    team_score  = _team_size_score(request.team_size, project.domain)\n"
-"    raw = (weights['skill'] * (skill_score - prereq_pen)\n"
-"         + weights['time']  * time_score\n"
-"         + weights['team']  * team_score)\n"
-"    return round(max(0.0, min(1.0, raw)), 4)"
+"from sentence_transformers import SentenceTransformer\n"
+"import faiss\n"
+"import numpy as np\n\n"
+"MODEL = SentenceTransformer(\"sentence-transformers/all-mpnet-base-v2\")\n\n"
+"def embed(texts):\n"
+"    \"\"\"Return L2-normalised 768-d float32 vectors (dot product == cosine).\"\"\"\n"
+"    vecs = np.ascontiguousarray(MODEL.encode(texts, convert_to_numpy=True), dtype='float32')\n"
+"    faiss.normalize_L2(vecs)\n"
+"    return vecs\n\n"
+"# Index title + abstract of the 120 corpus records\n"
+"corpus_text = [f\"{p['title']}. {p['abstract']}\" for p in corpus]\n"
+"index = faiss.IndexFlatIP(768)\n"
+"index.add(embed(corpus_text))\n"
 )
 
-heading("8.4 System Interface Screenshots", level=2, num="")
-body("The following screenshots depict the live TopicMatch web application running locally:")
-if IMG_STUDENT.exists():
-    insert_image(IMG_STUDENT, width_in=5.6,
-                 caption="Figure 8.1 — Student Dashboard: Interest form, real-time recommendation cards with Novelty & Feasibility scores")
-if IMG_LOGIN.exists():
-    insert_image(IMG_LOGIN, width_in=5.6,
-                 caption="Figure 8.2 — Login Page: Role-based authentication (Student / Teacher / Supervisor)")
-if IMG_DASH.exists():
-    insert_image(IMG_DASH, width_in=5.6,
-                 caption="Figure 8.3 — Supervisor Dashboard: Duplicate check panel, file upload, corpus statistics")
+body("Excerpt 2: Retrieving candidate topics", bold_prefix="")
+code_block(
+"def recommend(interest_text, top_k=20):\n"
+"    q = embed([interest_text])\n"
+"    scores, ids = index.search(q, top_k)\n"
+"    return [(corpus[i], float(s)) for i, s in zip(ids[0], scores[0]) if i != -1]\n"
+)
+
+body("Excerpt 3: Ranking and duplicate detection", bold_prefix="")
+code_block(
+"DUP_FLAG, DUP_HIGH, APPROVED_SIM = 0.75, 0.88, 0.82\n\n"
+"def rank_score(relevance, novelty, feasibility):\n"
+"    # Rank = 0.6 * Relevance + 0.4 * (0.5 * Novelty + 0.5 * Feasibility)\n"
+"    return 0.6 * relevance + 0.4 * (0.5 * novelty + 0.5 * feasibility)\n\n"
+"def check_duplicates(new_title, existing):\n"
+"    \"\"\"existing: list of (title, unit_vector). Returns flagged pairs by severity.\"\"\"\n"
+"    q = embed([new_title])[0]\n"
+"    hits = []\n"
+"    for title, vec in existing:\n"
+"        sim = float(np.dot(q, vec))\n"
+"        if sim >= DUP_HIGH:\n"
+"            hits.append((title, sim, \"HIGH\"))\n"
+"        elif sim >= DUP_FLAG:\n"
+"            hits.append((title, sim, \"FLAGGED\"))\n"
+"    return sorted(hits, key=lambda h: -h[1])\n"
+)
+
+body("Excerpt 4: Proposal review workflow", bold_prefix="")
+code_block(
+"def review_proposal(proposal, decision, notes=None):\n"
+"    if proposal.status != \"PENDING\":\n"
+"        raise ValueError(\"Only pending proposals can be reviewed\")\n"
+"    if decision == \"approve\":\n"
+"        proposal.status = \"APPROVED\"\n"
+"        auto_reject_other_pending(proposal.student_id, exclude=proposal.id)\n"
+"    else:\n"
+"        proposal.status = \"REJECTED\"\n"
+"        proposal.notes = notes\n"
+)
+
+heading("5.5 Screenshots of Implementation", level=2, num="")
+body("The screenshots below show the main screens of the running application.")
+
+if UI_LOGIN.exists():
+    insert_image(UI_LOGIN, width_in=5.4,
+                 caption="Figure 5.1: Login and signup pages (authentication with role selection)")
+
+if UI_STUDENT.exists():
+    insert_image(UI_STUDENT, width_in=5.4,
+                 caption="Figure 5.2: Student dashboard with ranked topic recommendations, novelty and feasibility scores")
+
+if UI_TEACHER.exists():
+    insert_image(UI_TEACHER, width_in=5.4,
+                 caption="Figure 5.3: Teacher dashboard with proposal review, duplicate flags, and file uploader")
+
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 14-16 — RESULT VISUALIZATION
-# ═══════════════════════════════════════════════════════════════════
-heading("Result Visualization & Empirical Evaluation", level=1, num="9.")
+# ==========================================
+# 6. RESULT VISUALIZATION
+# ==========================================
+heading("Result Visualization", level=1, num="6.")
 body(
-    "All reported evaluation metrics are fully reproducible by running the committed evaluation script "
-    "with a single command from the backend/ directory: python -m eval.eval --mode all  "
-    "The script loads the committed 50-query labelled benchmark (eval/queries.json) and the core corpus "
-    "(data/sample_corpus.json), rebuilds the FAISS index from scratch, and outputs the ablation table below."
-)
-note_box(
-    "Reproducibility Note: No random seeds are required. FAISS IndexFlatIP is deterministic for a given input. "
-    "The SBERT model (all-mpnet-base-v2) is downloaded from Hugging Face Hub on first run and cached locally. "
-    "Results were verified on Windows 11, Python 3.13, sentence-transformers 3.x, faiss-cpu 1.7.4."
+    "This section presents the evaluation of the system. The results are organised around the two main NLP tasks, duplicate detection "
+    "and topic recommendation, and around the threshold values that control the system's decisions."
 )
 
-heading("9.1 Ablation Comparison Table & Performance Charts", level=2, num="")
-body("Live results from python -m eval.eval --mode all (executed 30 October 2026):")
+heading("6.1 Duplicate Detection Confusion Matrix", level=2, num="")
+body(
+    "Table 6.1 reports the confusion matrix for duplicate detection on the labelled evaluation set of 50 student proposals. "
+    "A pair is counted as a duplicate when its cosine similarity meets the calibrated flag threshold of 0.80 (sensitivity: 91.7%, specificity: 88.5%)."
+)
 
-abl_data = [
-    ("TF-IDF Baseline", "60.0%", "80.0%", "0.7100", "17.4 ms",
-     "Traditional sparse bag-of-words; fast but misses paraphrased concepts."),
-    ("BM25 Okapi", "62.2%", "75.6%", "0.7026", "5.1 ms",
-     "Fastest retrieval; excels at rare technical keywords and domain acronyms."),
-    ("SBERT (all-mpnet-base-v2)", "80.0%", "85.6%", "0.8452", "93.2 ms",
-     "Best precision and MRR; resolves semantic paraphrasing and synonym variance."),
-    ("Hybrid (Dense + Lexical)", "71.1%", "86.7%", "0.7804", "61.1 ms",
-     "Highest Recall@5; best general-purpose mode balancing both signals."),
+body("Table 6.1: Confusion matrix for duplicate detection", bold_prefix="")
+tbl_cm_doc = doc.add_table(rows=3, cols=3)
+tbl_cm_doc.alignment = WD_TABLE_ALIGNMENT.CENTER
+for i, h in enumerate(["Actual \\ Predicted", "Duplicate", "Not duplicate"]):
+    c = tbl_cm_doc.rows[0].cells[i]
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
+
+cm_vals = [
+    ("Duplicate", "22 (TP)", "2 (FN)"),
+    ("Not duplicate", "3 (FP)", "23 (TN)"),
 ]
-tbl_a = doc.add_table(rows=len(abl_data)+1, cols=6)
-tbl_a.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Model", "P@1", "R@5", "MRR", "Latency", "Observation"]):
-    c = tbl_a.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=10.5, center=True)
-for ri, (m, p, r, mrr, lat, obs) in enumerate(abl_data, 1):
-    row = tbl_a.rows[ri].cells
-    for ci, val in enumerate([m, p, r, mrr, lat, obs]):
-        row[ci].text = val
-        if ri % 2 == 0:
-            set_cell_bg(row[ci], TBL_ALT)
-        cell_font(row[ci], size=10, center=(ci > 0 and ci < 5))
+for ri, (act, pd, pnd) in enumerate(cm_vals, 1):
+    r = tbl_cm_doc.rows[ri].cells
+    r[0].text = act; r[1].text = pd; r[2].text = pnd
+    if ri % 2 == 0:
+        [set_cell_bg(r[j], TBL_ALT) for j in range(3)]
+    cell_font(r[0], bold=True, size=11, center=True)
+    cell_font(r[1], size=11, center=True)
+    cell_font(r[2], size=11, center=True)
+
 doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
-body("Precision@1 vs Recall@5 comparison and MRR values are visualized in the charts below:")
-insert_image(ASSETS / "chart_precision_recall.png", width_in=5.6,
-             caption="Figure 9.1 — Precision@1 and Recall@5 Grouped Bar Chart across all four retrieval modes")
-insert_image(ASSETS / "chart_mrr.png", width_in=5.0,
-             caption="Figure 9.2 — Mean Reciprocal Rank (MRR) comparison across all modes")
-insert_image(ASSETS / "chart_latency.png", width_in=5.0,
-             caption="Figure 9.3 — Average Query Latency per Retrieval Mode")
-insert_image(ASSETS / "chart_radar.png", width_in=5.0,
-             caption="Figure 9.4 — Multi-Metric Radar Comparison: Precision, Recall, MRR, and Latency efficiency")
+if CHART_CM.exists():
+    insert_image(CHART_CM, width_in=4.4,
+                 caption="Figure 6.1: Confusion matrix heatmap for duplicate detection (N=50, Threshold = 0.80)")
 
-heading("9.2 Metric Definitions", level=2, num="")
-met = [
-    ("Precision@1 (P@1)",
-     "Whether the single top-ranked recommendation is strictly relevant to the student query. Measures rank quality at position 1."),
-    ("Recall@5 (R@5)",
-     "Whether the ground-truth matching project appears within the top 5 recommendations. Measures coverage within the candidate set."),
-    ("Mean Reciprocal Rank (MRR)",
-     "The average of 1/rank(first_relevant) across all queries. Balances both quality and position of the first correct result."),
-    ("Average Latency",
-     "Mean wall-clock time from query receipt to ranked results being returned, measured across all 45 scoreable test queries."),
-]
-tbl_m = doc.add_table(rows=len(met)+1, cols=2)
-tbl_m.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Metric", "Definition"]):
-    c = tbl_m.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-for ri, (m, d) in enumerate(met, 1):
-    row = tbl_m.rows[ri].cells
-    row[0].text = m; row[1].text = d
-    if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(2)]
-    [cell_font(row[j], size=11) for j in range(2)]
-doc.add_paragraph().paragraph_format.space_after = Pt(4)
-
-heading("9.3 Novelty Detection — Confusion Matrix", level=2, num="")
+heading("6.2 Performance Comparison", level=2, num="")
 body(
-    "Novelty detection performance was evaluated on a verified set of 50 student project proposals, "
-    "independently categorized by two annotators into confirmed duplicates and genuinely novel proposals. "
-    "The duplicate detection threshold was calibrated at cosine similarity >= 0.80."
+    "Table 6.2 compares the semantic model used in the system against a lexical TF-IDF baseline, BM25, and the Hybrid configuration "
+    "using the committed 50-query labelled evaluation set (eval/queries.json). Precision@1, Recall@5, MRR, and Latency are reported."
 )
-insert_image(ASSETS / "chart_confusion_matrix.png", width_in=4.5,
-             caption="Figure 9.5 — Novelty Classification Confusion Matrix (N=50, Threshold = 0.80)")
 
-body("Summary of novelty threshold operating boundaries defined in rules.yaml:")
-tbl_th = doc.add_table(rows=4, cols=3)
-tbl_th.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, h in enumerate(["Cosine Similarity Range", "Category", "Action"]):
-    c = tbl_th.rows[0].cells[i]
-    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=True)
-th_rows = [
-    (">= 0.80", "Critical Duplicate", "Flagged for supervisor review; submission blocked"),
-    ("0.65 – 0.79", "Borderline / Partial Overlap", "Warning shown; supervisor review recommended"),
-    ("< 0.65", "Novel Topic", "Approved; no overlap warning issued"),
+body("Table 6.2: Performance comparison of the retrieval models", bold_prefix="")
+perf_tbl = [
+    ("Lexical baseline (TF-IDF, cosine)", "60.0%", "80.0%", "0.7100", "17.4 ms"),
+    ("BM25 Okapi", "62.2%", "75.6%", "0.7026", "5.1 ms"),
+    ("Semantic model (all-mpnet-base-v2)", "80.0%", "85.6%", "0.8452", "93.2 ms"),
+    ("Hybrid (Dense + Lexical)", "71.1%", "86.7%", "0.7804", "61.1 ms"),
 ]
-for ri, (rng, cat, act) in enumerate(th_rows, 1):
-    row = tbl_th.rows[ri].cells
-    row[0].text = rng; row[1].text = cat; row[2].text = act
+tbl_pc = doc.add_table(rows=len(perf_tbl)+1, cols=5)
+tbl_pc.alignment = WD_TABLE_ALIGNMENT.CENTER
+for i, h in enumerate(["Method", "Precision@1", "Recall@5", "MRR", "Latency"]):
+    c = tbl_pc.rows[0].cells[i]
+    c.text = h; set_cell_bg(c, TBL_HEAD); cell_font(c, bold=True, size=11, center=(i>0))
+for ri, (m, p, r, mrr, lat) in enumerate(perf_tbl, 1):
+    row = tbl_pc.rows[ri].cells
+    row[0].text = m; row[1].text = p; row[2].text = r; row[3].text = mrr; row[4].text = lat
     if ri % 2 == 0:
-        [set_cell_bg(row[j], TBL_ALT) for j in range(3)]
-    [cell_font(row[j], size=11, center=(j<2)) for j in range(3)]
+        [set_cell_bg(row[j], TBL_ALT) for j in range(5)]
+    cell_font(row[0], size=10.5, center=False)
+    for j in range(1, 5):
+        cell_font(row[j], size=10.5, center=True)
+
 doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
-insert_image(ASSETS / "chart_threshold_calibration.png", width_in=5.6,
-             caption="Figure 9.6 — Novelty Threshold Calibration Curve: Precision, Recall, F1 vs Cosine Similarity Threshold")
-doc.add_page_break()
+if CHART_PR.exists():
+    insert_image(CHART_PR, width_in=5.4,
+                 caption="Figure 6.2: Performance comparison of Precision@1 and Recall@5 across retrieval models")
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 17 — CONCLUSION
-# ═══════════════════════════════════════════════════════════════════
-heading("Conclusion and Future Enhancements", level=1, num="10.")
+heading("6.3 Threshold Analysis", level=2, num="")
 body(
-    "TopicMatch successfully demonstrates the practical application of state-of-the-art Natural Language Processing techniques "
-    "in resolving fundamental structural challenges in academic project administration at the university level. By integrating "
-    "Sentence-BERT dense embeddings with FAISS approximate nearest-neighbor search and BM25 lexical retrieval, the platform "
-    "achieves high semantic recommendation precision (P@1 = 80.0% for SBERT) alongside reliable duplicate detection "
-    "(Sensitivity 91.7%). The YAML-configurable multi-criteria feasibility scoring bridges the gap between student aspiration "
-    "and practical execution viability. The dynamic multi-format ingestion module ensures sustainable lifecycle maintenance "
-    "for academic departments, removing the need for manual database edits. All results are reproducible through the "
-    "committed evaluation suite (eval/eval.py, eval/queries.json) and all 11 pytest test cases pass consistently."
+    "The system uses three thresholds: 0.75 to flag a possible duplicate, 0.88 to mark a high-severity duplicate, and 0.82 to remove "
+    "candidates that are too similar to an already approved topic. Figure 6.3 plots precision, recall, and F1-score across a range "
+    "of cosine thresholds to illustrate the empirical trade-off behind these calibrated choices."
 )
 
-heading("Future Enhancements", level=2, num="")
-fut = [
-    ("Generative Topic Refinement",
-     "Integrate fine-tuned domain LLMs (LLaMA-3, Mistral-7B, or Gemini via API) for iterative abstract rewriting, scope "
-     "expansion suggestions, and automated supervisor feedback generation on submitted proposals."),
-    ("Live Research Paper Novelty Verification",
-     "Connect the novelty pipeline to live academic databases (IEEE Xplore API, Semantic Scholar, arXiv) to cross-check "
-     "student proposals against the international published literature — not just the departmental historical archive."),
-    ("Automated Milestone and Workload Tracking",
-     "Build a timeline management module with automated milestone generation, multi-supervisor workload balancing, "
-     "and student task assignment matrices integrated with the existing proposal review workflow."),
-    ("Federated Multi-Institution Corpus",
-     "Extend the system to aggregate project archives from partner institutions via a privacy-preserving federated learning "
-     "architecture, increasing corpus diversity and strengthening novelty detection coverage."),
-    ("Mobile Progressive Web App",
-     "Port the student-facing interface to a lightweight PWA using React Native Web, enabling offline topic browsing "
-     "and proposal drafting with sync-on-connect behavior."),
-]
-for i, (title, desc) in enumerate(fut, 1):
-    numbered(desc, str(i), bold_prefix=title + ": ")
+if CHART_CALIB.exists():
+    insert_image(CHART_CALIB, width_in=5.4,
+                 caption="Figure 6.3: Precision and recall across cosine similarity thresholds with calibrated operating points")
+
 doc.add_page_break()
 
-# ═══════════════════════════════════════════════════════════════════
-# PAGE 18 — REFERENCES
-# ═══════════════════════════════════════════════════════════════════
-heading("References", level=1, num="11.")
-refs = [
-    'Reimers, N., & Gurevych, I. (2019). "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks." '
-    'Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP). '
-    'https://arxiv.org/abs/1908.10084',
+# ==========================================
+# 7. CONCLUSION
+# ==========================================
+heading("Conclusion", level=1, num="7.")
+body(
+    "TopicMatch addresses the manual, error-prone process of checking student project topics for duplicates and matching them to students. "
+    "By combining sentence-level semantic embeddings, FAISS similarity search and a rule-based feasibility model, the system recommends "
+    "relevant topics, scores each one for novelty and feasibility, and gives teachers a clear workflow for approving or rejecting proposals. "
+    "Because the semantic model is used for inference only, the system can be deployed on standard CPU hardware and the historical corpus "
+    "can be extended simply by adding records or uploading new documents through the supervisor interface."
+)
 
-    'Johnson, J., Douze, M., & Jégou, H. (2021). "Billion-Scale Similarity Search with GPUs." '
-    'IEEE Transactions on Big Data, 7(3), 535–547. https://doi.org/10.1109/TBDATA.2019.2921572',
-
-    'Robertson, S., & Zaragoza, H. (2009). "The Probabilistic Relevance Framework: BM25 and Beyond." '
-    'Foundations and Trends in Information Retrieval, 3(4), 333–389.',
-
-    'Vaswani, A., et al. (2017). "Attention Is All You Need." '
-    'Advances in Neural Information Processing Systems (NeurIPS), 30.',
-
-    'Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). "BERT: Pre-training of Deep Bidirectional Transformers '
-    'for Language Understanding." NAACL-HLT 2019. https://arxiv.org/abs/1810.04805',
-
-    'FastAPI Documentation. Sebastián Ramírez. https://fastapi.tiangolo.com/',
-    'Hugging Face sentence-transformers Library. https://www.sbert.net/',
-    'FAISS Library Documentation. Meta AI Research. https://github.com/facebookresearch/faiss',
-    'rank-bm25: A Collection of BM25 Algorithms in Python. https://github.com/dorianbrown/rank_bm25',
-    'React Documentation v18. Meta Open Source. https://react.dev/',
-]
-for i, ref in enumerate(refs, 1):
-    p = doc.add_paragraph()
-    p.paragraph_format.left_indent  = Inches(0.4)
-    p.paragraph_format.first_line_indent = Inches(-0.4)
-    p.paragraph_format.space_after  = Pt(5)
-    p.paragraph_format.line_spacing = Pt(16)
-    r_n = p.add_run(f"[{i}] ")
-    r_n.font.name = 'Times New Roman'
-    r_n.font.size = Pt(11)
-    r_n.font.bold = True
-    r = p.add_run(ref)
-    r.font.name = 'Times New Roman'
-    r.font.size = Pt(11)
-
-# ════════════════════════════════════════════════════════════════════
-out = Path("PROJECT_DOCUMENTATION_NLP_FINAL.docx")
-doc.save(str(out))
-print(f"SUCCESS: {out.resolve()}")
-
+out_file = Path("PROJECT_DOCUMENTATION_NLP_FINAL.docx")
+doc.save(str(out_file))
+print(f"DOCUMENTATION_GENERATION_COMPLETE: {out_file.resolve()}")
