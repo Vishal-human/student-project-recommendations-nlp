@@ -30,6 +30,18 @@ def on_startup():
             )
 
 
+@app.get("/")
+def root():
+    return {
+        "app": "TopicMatch — Student Project Recommendation Platform API",
+        "status": "running",
+        "docs_url": "http://127.0.0.1:8000/docs",
+        "redoc_url": "http://127.0.0.1:8000/redoc",
+        "frontend_url": "http://localhost:5173",
+        "message": "Visit /docs for the interactive Swagger API Explorer, or http://localhost:5173 for the React Web App."
+    }
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
