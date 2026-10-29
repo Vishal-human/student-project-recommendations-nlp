@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import Navbar from '../components/Navbar.jsx'
 import {
   getDomains, getMe, getStudentDashboard,
-  getRecommendations, submitProposal, getMyProposals
+  getRecommendations, generateTopics, submitProposal, getMyProposals
 } from '../api.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
@@ -188,6 +188,9 @@ export default function StudentDashboard() {
   const [teamSize, setTeamSize] = useState(2)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState(null)
+  const [generated, setGenerated] = useState(null)
+  const [genNotice, setGenNotice] = useState('')
+  const [genLoading, setGenLoading] = useState(false)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitMsg, setSubmitMsg] = useState('')
@@ -242,6 +245,30 @@ export default function StudentDashboard() {
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleGenerate() {
+    if (!interests.trim()) {
+      setError('Describe your interests first so new ideas can be generated.')
+      return
+    }
+    setError('')
+    setGenLoading(true)
+    setGenerated(null)
+    try {
+      const res = await generateTopics({
+        interests: interests.trim(),
+        stack,
+        time_budget_weeks: Number(timeBudget),
+        team_size: Number(teamSize),
+      })
+      setGenerated(res.recommendations)
+      setGenNotice(res.notice)
+    } catch (err) {
+      setError(err.message || 'Could not generate ideas. Please try again.')
+    } finally {
+      setGenLoading(false)
     }
   }
 
@@ -448,16 +475,29 @@ export default function StudentDashboard() {
               </p>
             )}
 
-            <button
-              type="submit" disabled={loading}
-              style={{
-                alignSelf: 'flex-start', background: loading ? '#3730a3' : '#6366f1',
-                color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px',
-                fontSize: 15, fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
-              }}
-            >
-              {loading ? 'Finding topics…' : 'Get Recommendations'}
-            </button>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button
+                type="submit" disabled={loading}
+                style={{
+                  background: loading ? '#3730a3' : '#6366f1',
+                  color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px',
+                  fontSize: 15, fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
+                }}
+              >
+                {loading ? 'Finding topics…' : 'Get Recommendations'}
+              </button>
+              <button
+                type="button" onClick={handleGenerate} disabled={genLoading}
+                title="Create brand-new topics in your interest area that don't exist in the database"
+                style={{
+                  background: 'transparent', color: '#818cf8', border: '1.5px solid #6366f1',
+                  borderRadius: 8, padding: '10px 28px', fontSize: 15, fontWeight: 600,
+                  cursor: genLoading ? 'not-allowed' : 'pointer',
+                }}
+              >
+                {genLoading ? 'Generating ideas…' : '✨ Generate New Ideas'}
+              </button>
+            </div>
           </form>
         </div>
 
@@ -469,6 +509,26 @@ export default function StudentDashboard() {
               <p style={{ color: '#64748b' }}>No available topics match your search — some may have been claimed by other students. Try different keywords.</p>
             ) : (
               results.map((item, i) => (
+                <ResultCard
+                  key={i}
+                  item={item}
+                  onSubmit={handleProposalSubmit}
+                  submitting={submitting}
+                  hasActiveProposal={hasActiveProposal}
+                />
+              ))
+            )}
+          </div>
+        )}
+
+        {generated && (
+          <div className="card">
+            <h2>✨ New Ideas ({generated.length})</h2>
+            {genNotice && <p style={{ color: '#94a3b8', fontSize: 13, marginTop: 0 }}>{genNotice}</p>}
+            {generated.length === 0 ? (
+              <p style={{ color: '#64748b' }}>No sufficiently new ideas this time — try rewording your interests and generate again.</p>
+            ) : (
+              generated.map((item, i) => (
                 <ResultCard
                   key={i}
                   item={item}

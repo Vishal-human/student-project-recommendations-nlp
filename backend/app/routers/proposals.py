@@ -22,7 +22,7 @@ from sqlalchemy.orm import Session
 
 from app.db.database import get_db
 from app.db.models import ProjectProposal, User
-from app.deps import get_current_user, require_role
+from app.deps import get_current_user, require_role, require_roles
 
 router = APIRouter(prefix="/proposals", tags=["proposals"])
 
@@ -182,9 +182,9 @@ def get_pending_proposals(
 @router.get("/all", response_model=list[ProposalOut])
 def get_all_proposals(
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_role("teacher")),
+    current_user: User = Depends(require_roles("teacher", "supervisor")),
 ):
-    """Teacher: all proposals (all statuses), sorted by time."""
+    """Teacher / supervisor: all proposals (all statuses), sorted by time."""
     proposals = (
         db.query(ProjectProposal)
         .order_by(ProjectProposal.submitted_at.asc())

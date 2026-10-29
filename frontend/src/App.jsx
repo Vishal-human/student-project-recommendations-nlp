@@ -7,6 +7,7 @@ import ForgotPassword from './pages/ForgotPassword.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import StudentDashboard from './pages/StudentDashboard.jsx'
 import TeacherDashboard from './pages/TeacherDashboard.jsx'
+import SupervisorHome from './pages/SupervisorHome.jsx'
 
 export default function App() {
   return (
@@ -30,6 +31,14 @@ export default function App() {
           element={
             <ProtectedRoute role="teacher">
               <TeacherDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/supervisor"
+          element={
+            <ProtectedRoute role="supervisor">
+              <SupervisorHome />
             </ProtectedRoute>
           }
         />

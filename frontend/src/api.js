@@ -21,11 +21,14 @@ export const forgotPassword = (payload) =>
 export const resetPassword = (payload) =>
   request('/auth/reset-password', { method: 'POST', body: JSON.stringify(payload) })
 export const getStudentDashboard = () => request('/dashboard/student')
+export const getSupervisorDashboard = () => request('/dashboard/supervisor')
 export const getTeacherDashboard = () => request('/dashboard/teacher')
 export const getStudents = () => request('/teacher/students')
 export const getDomains = () => request('/topics/domains')
 export const getRecommendations = (payload) =>
   request('/topics/recommend', { method: 'POST', body: JSON.stringify(payload) })
+export const generateTopics = (payload) =>
+  request('/topics/generate', { method: 'POST', body: JSON.stringify(payload) })
 export const checkDuplicates = (topics) =>
   request('/supervisor/check-duplicates', { method: 'POST', body: JSON.stringify(topics) })
 

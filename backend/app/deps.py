@@ -25,6 +25,19 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     return user
 
 
+def require_roles(*roles: str):
+    """Allow any one of several roles (e.g. teacher or supervisor)."""
+    def checker(user: User = Depends(get_current_user)) -> User:
+        if user.role not in roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Requires one of: {', '.join(roles)}",
+            )
+        return user
+
+    return checker
+
+
 def require_role(role: str):
     def checker(user: User = Depends(get_current_user)) -> User:
         if user.role != role:
