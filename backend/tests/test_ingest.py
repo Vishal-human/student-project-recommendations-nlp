@@ -68,3 +68,4 @@ def test_preprocess_deduplication():
     assert len(new_entries) == 1
     assert new_entries[0].title == "Autonomous Drone Fleet Coordination"
     assert new_entries[0].id.startswith("up-")
+

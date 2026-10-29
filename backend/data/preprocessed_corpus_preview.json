@@ -1,0 +1,172 @@
+[
+  {
+    "id": "gls-2023-001",
+    "title": "AI-Based Resume Screening Tool",
+    "abstract": "We propose an automated system that screens resumes against job descriptions using sentence embeddings and cosine similarity. It ranks candidates by fit score and exports results into csv files.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "flask",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "hr-tech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-002",
+    "title": "Fake News Detection System Using Nlp And Machine Learning",
+    "abstract": "FAKE NEWS DETECTION SYSTEM USING NLP AND MACHINE LEARNING. In the current digital age, mis-information spreads rapidly across social media platforms like twitter and facebook.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "data-analysis",
+      "machine-learning",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-003",
+    "title": "Student Academic Performance Prediction & Early Warning System",
+    "abstract": "Predicts final exam scores and detects at-risk students using regression models over attendance percentages, internal assignment scores, and mid-term exam results collected from college LMS. Stack python, scikit-learn, eda, data-analysis, matplotlib.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "data-analysis",
+      "machine-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-004",
+    "title": "E-Commerce Product Recommendation Engine",
+    "abstract": "A collaborative filtering recommendation system that suggests products to users based on purchase and browsing history using matrix factorization algorithms (SVD). Backed by python backend, flask rest api, and mongodb database for user event storage.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "api-integration",
+      "flask",
+      "mongodb",
+      "python"
+    ],
+    "domain_tags": [
+      "e-commerce"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-005",
+    "title": "Sentiment Analysis On Twitter (X) Feeds",
+    "abstract": "SENTIMENT ANALYSIS ON TWITTER (X) FEEDS. This application analyzes public sentiment on Twitter using VADER lexicon and fine-tuned BERT transformer model for real-time tweet classification into positive, negative, and neutral categories.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "api-integration",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-006",
+    "title": "Face Recognition Attendance System for Smart Classrooms",
+    "abstract": "Marks student attendance automatically using OpenCV face detection (Haar cascade) and deep facial feature recognition pipeline with a local SQLite SQL database. Developed with python and open-cv.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "python",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-007",
+    "title": "Chatbot for College FAQs & Campus Inquiries",
+    "abstract": "A rule-based and intent-classification conversational chatbot that answers frequently asked questions about admissions, timetable schedules, and college policies. Uses python, nlp tokenization, flask backend, and vanilla javascript frontend.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "flask",
+      "javascript",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-008",
+    "title": "Image Caption Generator with Deep Learning",
+    "abstract": "Generates descriptive textual captions for uploaded images using a CNN encoder (VGG-16) and LSTM decoder trained on the MSCOCO image dataset. Stack includes python, deep-learning, pytorch, computer-vision, and nlp.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "deep-learning",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-009",
+    "title": "Online Exam Proctoring and Cheating Detection System",
+    "abstract": "Detects cheating behavior during online university exams using webcam-based face tracking, head pose estimation, and browser tab-switch monitoring. Tech python, opencv computer vision, nodejs, javascript.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "javascript",
+      "nodejs",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech",
+      "safety"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-010",
+    "title": "Stock Price Prediction and Forecasting using Stacked LSTM",
+    "abstract": "Forecasts next-day closing prices for NSE and BSE listed stocks using stacked Long Short-Term Memory neural networks trained on 5 years of OHLCV historical time series data. Technologies python, deep learning, keras, financial data analysis.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "data-analysis",
+      "deep-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "finance"
+    ],
+    "language": "en"
+  }
+]

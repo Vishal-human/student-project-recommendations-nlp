@@ -1,0 +1,16 @@
+Arjun Mehta, 22IMCA001, Federated Learning Framework for Privacy-Preserving Hospital Data Analysis
+Priya Nair, 22IMCA002, Real-Time Air Quality Prediction Dashboard for Ahmedabad City Using LSTM
+Rohan Desai, 22IMCA003, Automated Exam Proctoring System Using Eye-Tracking and Head Pose Detection
+Simran Kaur, 22IMCA004, E-Waste Collection and Recycling Incentive Platform with Gamification
+Varun Shah, 22IMCA005, Multi-Agent Negotiation System for Smart Grid Energy Trading
+Anjali Patel, 22IMCA006, Vehicle License Plate Recognition for Automated Toll Collection in Gujarat
+Karan Joshi, 22IMCA007, Gesture-Controlled Smart Home Automation using MediaPipe and Raspberry Pi
+Shreya Bhatt, 22IMCA008, Explainable AI Dashboard for Bank Loan Approval Decisions
+Nishant Trivedi, 22IMCA009, Automated Plant Disease Diagnosis from Leaf Images with Expert Report Generation
+Pooja Yadav, 22IMCA010, Customer Churn Prediction and Retention Strategy Recommender for Telecom
+Mihir Solanki, 22IMCA011, NLP-Based Legal Contract Risk Clause Extractor and Summarizer
+Kavya Sharma, 22IMCA012, Smart Attendance System Combining Face Recognition and WiFi Probe Data
+Arpit Gupta, 22IMCA013, Personalized News Article Bias Detector using BERT and Media Credibility Scores
+Disha Modi, 22IMCA014, Virtual Makeup Try-On App using Augmented Reality and Face Landmark Detection
+Siddharth Rao, 22IMCA015, Distributed Ledger System for Transparent NGO Fund Allocation and Audit Trail
+

@@ -1,122 +1,2295 @@
 [
-  {"id":"gls-2023-001","title":"AI-Based Resume Screening Tool","abstract":"A system that screens resumes against job descriptions using sentence embeddings and cosine similarity to automatically rank candidates by fit score.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask"],"domain_tags":["hr-tech","nlp"],"language":"en"},
-  {"id":"gls-2023-002","title":"Fake News Detection using NLP","abstract":"Classifies news articles as real or fake using TF-IDF features and a logistic regression classifier trained on a public dataset.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["nlp","social-media"],"language":"en"},
-  {"id":"gls-2022-003","title":"Student Performance Prediction System","abstract":"Predicts final exam scores using regression models over attendance, assignment scores, and mid-term results collected from an LMS.","year":2022,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["edtech","machine-learning"],"language":"en"},
-  {"id":"gls-2022-004","title":"E-Commerce Product Recommendation Engine","abstract":"Collaborative filtering recommendation system that suggests products to users based on purchase and browsing history using matrix factorization.","year":2022,"department":"IMCA","tech_stack_tags":["python","machine-learning","flask","mongodb"],"domain_tags":["e-commerce","machine-learning"],"language":"en"},
-  {"id":"gls-2023-005","title":"Sentiment Analysis of Twitter Data","abstract":"Analyzes public sentiment on Twitter using VADER and fine-tuned BERT for real-time tweet classification into positive, negative, and neutral.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","api-integration"],"domain_tags":["nlp","social-media"],"language":"en"},
-  {"id":"gls-2021-006","title":"Face Recognition Attendance System","abstract":"Marks student attendance automatically using OpenCV face detection and recognition pipeline with a local SQLite database.","year":2021,"department":"IMCA","tech_stack_tags":["python","computer-vision","sql"],"domain_tags":["edtech","computer-vision"],"language":"en"},
-  {"id":"gls-2022-007","title":"Chatbot for College FAQs","abstract":"A rule-based and intent-classification chatbot that answers frequently asked questions about admissions, timetable, and college policies.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","flask","javascript"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2023-008","title":"Image Caption Generator","abstract":"Generates descriptive captions for images using a CNN encoder and LSTM decoder trained on the MSCOCO dataset.","year":2023,"department":"IMCA","tech_stack_tags":["python","deep-learning","computer-vision"],"domain_tags":["computer-vision","nlp"],"language":"en"},
-  {"id":"gls-2021-009","title":"Online Exam Proctoring System","abstract":"Detects cheating during online exams using webcam-based face tracking, gaze estimation, and tab-switch monitoring in the browser.","year":2021,"department":"IMCA","tech_stack_tags":["python","computer-vision","javascript","nodejs"],"domain_tags":["edtech","computer-vision"],"language":"en"},
-  {"id":"gls-2022-010","title":"Stock Price Prediction using LSTM","abstract":"Forecasts next-day closing prices for NSE-listed stocks using a stacked LSTM model trained on 5 years of OHLCV historical data.","year":2022,"department":"IMCA","tech_stack_tags":["python","deep-learning","data-analysis"],"domain_tags":["finance","deep-learning"],"language":"en"},
-  {"id":"gls-2023-011","title":"Smart Traffic Signal Control using Computer Vision","abstract":"Uses YOLOv8 to count vehicles at intersections in real time and dynamically adjusts signal timings to reduce idle wait time.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["smart-city","computer-vision"],"language":"en"},
-  {"id":"gls-2022-012","title":"Crop Disease Detection from Leaf Images","abstract":"Classifies plant leaf diseases using a fine-tuned ResNet-50 model trained on the PlantVillage dataset, deployed as a mobile-friendly web app.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning","flask"],"domain_tags":["agriculture","computer-vision"],"language":"en"},
-  {"id":"gls-2021-013","title":"Medical Image Segmentation using U-Net","abstract":"Segments tumor regions in MRI brain scans using a U-Net architecture trained on the BraTS 2020 dataset.","year":2021,"department":"IMCA","tech_stack_tags":["python","deep-learning","computer-vision"],"domain_tags":["healthcare","deep-learning"],"language":"en"},
-  {"id":"gls-2023-014","title":"Sign Language Recognition System","abstract":"Recognizes ASL hand gestures from webcam input using MediaPipe hand landmarks and a trained Random Forest classifier.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","machine-learning"],"domain_tags":["accessibility","computer-vision"],"language":"en"},
-  {"id":"gls-2022-015","title":"Document Summarization using Transformers","abstract":"Generates abstractive summaries of long documents using a fine-tuned BART model, with a simple web interface for pasting text.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","flask"],"domain_tags":["nlp","productivity"],"language":"en"},
-  {"id":"gls-2021-016","title":"Movie Recommendation System","abstract":"Recommends movies to users based on viewing history and genre preferences using collaborative filtering and content-based filtering hybrid.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","flask"],"domain_tags":["entertainment","machine-learning"],"language":"en"},
-  {"id":"gls-2023-017","title":"Real-Time Object Detection for Blind Assistance","abstract":"Detects objects in a video stream using YOLOv5 and converts detections to audio descriptions to assist visually impaired users.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["accessibility","computer-vision"],"language":"en"},
-  {"id":"gls-2022-018","title":"Automated Code Review Tool using NLP","abstract":"Analyzes code diffs using NLP to detect common anti-patterns, naming violations, and missing docstrings, and suggests inline fixes.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","api-integration"],"domain_tags":["developer-tools","nlp"],"language":"en"},
-  {"id":"gls-2021-019","title":"Credit Card Fraud Detection","abstract":"Detects fraudulent transactions in real time using an XGBoost model trained on the anonymized European credit card fraud dataset.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["finance","machine-learning"],"language":"en"},
-  {"id":"gls-2023-020","title":"Customer Churn Prediction for Telecom","abstract":"Predicts which telecom customers are likely to churn using a gradient boosted classifier and a SHAP-based explanation dashboard.","year":2023,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["telecom","machine-learning"],"language":"en"},
-  {"id":"gls-2022-021","title":"Handwritten Digit Recognition Web App","abstract":"Lets users draw digits on a canvas and classifies them using a CNN trained on MNIST, deployed as a real-time browser app.","year":2022,"department":"IMCA","tech_stack_tags":["python","deep-learning","javascript","html","css"],"domain_tags":["deep-learning","education"],"language":"en"},
-  {"id":"gls-2021-022","title":"Emotion Detection from Facial Expressions","abstract":"Detects the emotional state of a person from webcam video frames using a CNN trained on the FER-2013 dataset.","year":2021,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["healthcare","computer-vision"],"language":"en"},
-  {"id":"gls-2023-023","title":"Smart Home Automation Dashboard","abstract":"Controls home appliances via a web dashboard connected to a Raspberry Pi and ESP8266 modules, with scheduling and voice command support.","year":2023,"department":"IMCA","tech_stack_tags":["python","javascript","react","api-integration"],"domain_tags":["iot","smart-home"],"language":"en"},
-  {"id":"gls-2022-024","title":"Job Portal with Skill-Based Matching","abstract":"A full-stack job board that matches candidates to job posts using TF-IDF skill overlap scoring between resumes and job descriptions.","year":2022,"department":"IMCA","tech_stack_tags":["python","django","sql","nlp"],"domain_tags":["hr-tech","web"],"language":"en"},
-  {"id":"gls-2021-025","title":"Online Library Management System","abstract":"A web application for managing books, members, and lending records with search, overdue reminders, and PDF report generation.","year":2021,"department":"IMCA","tech_stack_tags":["python","django","sql"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2023-026","title":"Automatic Question Paper Generator","abstract":"Generates balanced question papers from a question bank using NLP difficulty tagging and topic coverage constraints.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask","sql"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2022-027","title":"E-Learning Platform with Quiz Module","abstract":"A course delivery platform with video lessons, interactive quizzes, progress tracking, and certificate generation.","year":2022,"department":"IMCA","tech_stack_tags":["python","django","sql","javascript"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2021-028","title":"Inventory Management System for Retail","abstract":"Manages stock levels, purchase orders, and supplier records for a retail shop, with low-stock alerts and sales analytics.","year":2021,"department":"IMCA","tech_stack_tags":["python","flask","sql","javascript"],"domain_tags":["business","web"],"language":"en"},
-  {"id":"gls-2023-029","title":"Mental Health Chatbot using CBT Techniques","abstract":"A conversational chatbot that applies Cognitive Behavioral Therapy prompts to help users identify and reframe negative thought patterns.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask"],"domain_tags":["healthcare","nlp"],"language":"en"},
-  {"id":"gls-2022-030","title":"Plagiarism Detection Tool for Academic Papers","abstract":"Computes semantic similarity between submitted academic papers and a corpus of published work using sentence embeddings and cosine similarity.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2021-031","title":"Weather Forecasting using ARIMA","abstract":"Builds a time-series forecasting model using ARIMA on historical Ahmedabad weather data to predict temperature and rainfall 7 days ahead.","year":2021,"department":"IMCA","tech_stack_tags":["python","data-analysis","machine-learning"],"domain_tags":["data-science","environment"],"language":"en"},
-  {"id":"gls-2023-032","title":"Voice Assistant for College Admin Tasks","abstract":"A voice-activated assistant built with SpeechRecognition and GPT API that handles leave applications, timetable queries, and exam schedules.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","api-integration"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2022-033","title":"Social Media Analytics Dashboard","abstract":"Aggregates posts from Twitter and Instagram and displays engagement, sentiment trends, and top hashtags on a real-time dashboard.","year":2022,"department":"IMCA","tech_stack_tags":["python","data-analysis","api-integration","react"],"domain_tags":["social-media","data-science"],"language":"en"},
-  {"id":"gls-2021-034","title":"Blood Bank Management System","abstract":"Manages donor registrations, blood stock levels, and request matching for hospitals, with SMS alerts for urgent blood requirements.","year":2021,"department":"IMCA","tech_stack_tags":["python","flask","sql","api-integration"],"domain_tags":["healthcare","web"],"language":"en"},
-  {"id":"gls-2023-035","title":"Personalized News Aggregator","abstract":"Fetches news from multiple RSS feeds and ranks articles by user interest profile built from reading history using TF-IDF and cosine similarity.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask","api-integration"],"domain_tags":["nlp","media"],"language":"en"},
-  {"id":"gls-2022-036","title":"Smart Attendance using QR Code","abstract":"Students scan a time-limited QR code shown on a projector to mark attendance, with GPS verification to prevent proxy marking.","year":2022,"department":"IMCA","tech_stack_tags":["python","flask","sql","javascript"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2021-037","title":"Hostel Management System","abstract":"Handles room allotments, fee payments, complaint logging, and warden communication for a college hostel administration.","year":2021,"department":"IMCA","tech_stack_tags":["python","django","sql"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2023-038","title":"Road Pothole Detection using Deep Learning","abstract":"Detects and classifies road surface defects from dashcam footage using a fine-tuned YOLOv8 model, and generates GPS-tagged reports.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning","api-integration"],"domain_tags":["smart-city","computer-vision"],"language":"en"},
-  {"id":"gls-2022-039","title":"E-Voting System with Facial Authentication","abstract":"Allows registered voters to cast ballots online after face-recognition identity verification, with tamper-proof audit logs.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","flask","sql"],"domain_tags":["governance","computer-vision"],"language":"en"},
-  {"id":"gls-2021-040","title":"Expense Tracker with Category Prediction","abstract":"Records personal expenses and uses an NLP classifier to auto-categorize transactions from a description field into budget categories.","year":2021,"department":"IMCA","tech_stack_tags":["python","nlp","flask","sql"],"domain_tags":["finance","nlp"],"language":"en"},
-  {"id":"gls-2023-041","title":"Automated Invoice Processing with OCR","abstract":"Extracts vendor name, date, line items, and totals from scanned invoice PDFs using Tesseract OCR and named entity recognition.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","computer-vision"],"domain_tags":["finance","nlp"],"language":"en"},
-  {"id":"gls-2022-042","title":"Music Genre Classification using CNNs","abstract":"Classifies audio clips into 10 music genres using mel-spectrogram features extracted from audio files and a CNN trained on the GTZAN dataset.","year":2022,"department":"IMCA","tech_stack_tags":["python","deep-learning","data-analysis"],"domain_tags":["entertainment","deep-learning"],"language":"en"},
-  {"id":"gls-2021-043","title":"Fake Product Review Detection","abstract":"Identifies paid/fake product reviews on e-commerce sites using a combination of review text NLP features and reviewer behavioral signals.","year":2021,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["e-commerce","nlp"],"language":"en"},
-  {"id":"gls-2023-044","title":"Drowsiness Detection for Drivers","abstract":"Monitors a driver's eye aspect ratio using facial landmarks from dlib and triggers an audio alert when drowsiness is detected.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","machine-learning"],"domain_tags":["safety","computer-vision"],"language":"en"},
-  {"id":"gls-2022-045","title":"Virtual Try-On for E-Commerce","abstract":"Overlays clothing items onto a user's image using pose estimation and image warping, allowing virtual try-on in the browser.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning","javascript"],"domain_tags":["e-commerce","computer-vision"],"language":"en"},
-  {"id":"gls-2021-046","title":"Air Quality Index Prediction","abstract":"Predicts AQI for Indian cities using sensor readings and meteorological data via a gradient boosted regression model with SHAP explanations.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["environment","data-science"],"language":"en"},
-  {"id":"gls-2023-047","title":"College Event Management Portal","abstract":"A web platform for posting, registering, and managing college events with QR-based check-in, team formation, and result publishing.","year":2023,"department":"IMCA","tech_stack_tags":["python","django","sql","javascript"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2022-048","title":"Text-to-SQL Query Generator","abstract":"Converts natural language questions about a database into valid SQL queries using a fine-tuned T5 model and a query validation layer.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","sql"],"domain_tags":["nlp","developer-tools"],"language":"en"},
-  {"id":"gls-2021-049","title":"Campus Food Ordering App","abstract":"A mobile-friendly web app allowing students to order food from the college canteen with real-time preparation status and wallet payment.","year":2021,"department":"IMCA","tech_stack_tags":["javascript","react","nodejs","mongodb"],"domain_tags":["campus","web"],"language":"en"},
-  {"id":"gls-2023-050","title":"Parking Slot Detection using Computer Vision","abstract":"Detects available and occupied parking slots from a surveillance camera feed using a segmentation model and generates a live occupancy map.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["smart-city","computer-vision"],"language":"en"},
-  {"id":"gls-2022-051","title":"Hindi Sentiment Analysis","abstract":"Classifies sentiment in Hindi social media comments using a transliteration-aware preprocessing pipeline and a multilingual BERT model.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["nlp","social-media"],"language":"hi"},
-  {"id":"gls-2021-052","title":"Automated Plant Watering System with IoT","abstract":"Waters plants automatically based on soil moisture sensor data using a NodeMCU and a Flask dashboard for remote monitoring and scheduling.","year":2021,"department":"IMCA","tech_stack_tags":["python","flask","api-integration"],"domain_tags":["iot","agriculture"],"language":"en"},
-  {"id":"gls-2023-053","title":"Legal Document Clause Extractor","abstract":"Extracts key clauses (jurisdiction, penalty, termination) from legal contracts using NLP named entity recognition and rule-based patterns.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask"],"domain_tags":["legal","nlp"],"language":"en"},
-  {"id":"gls-2022-054","title":"Diabetes Risk Prediction System","abstract":"Predicts a patient's risk of developing Type 2 diabetes using health indicators from the Pima Indians dataset and a logistic regression model.","year":2022,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["healthcare","machine-learning"],"language":"en"},
-  {"id":"gls-2021-055","title":"Heart Disease Prediction using ML","abstract":"Predicts likelihood of coronary heart disease from clinical parameters using an ensemble of Random Forest and SVM classifiers.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["healthcare","machine-learning"],"language":"en"},
-  {"id":"gls-2023-056","title":"Automatic Caption Generation for Social Media","abstract":"Generates engaging captions for uploaded photos by combining image-to-text description and tone-adjustment using a language model.","year":2023,"department":"IMCA","tech_stack_tags":["python","deep-learning","nlp","api-integration"],"domain_tags":["social-media","nlp"],"language":"en"},
-  {"id":"gls-2022-057","title":"Smart Mirror with Daily Briefing","abstract":"A Raspberry Pi-powered mirror display that shows time, weather, news headlines, and daily schedule with voice command control.","year":2022,"department":"IMCA","tech_stack_tags":["python","api-integration","javascript"],"domain_tags":["iot","smart-home"],"language":"en"},
-  {"id":"gls-2021-058","title":"Bus Route Optimizer using Genetic Algorithm","abstract":"Optimizes city bus routes to minimize travel time and fuel consumption using a genetic algorithm on real Ahmedabad BRTS data.","year":2021,"department":"IMCA","tech_stack_tags":["python","data-analysis","machine-learning"],"domain_tags":["smart-city","optimization"],"language":"en"},
-  {"id":"gls-2023-059","title":"Real Estate Price Prediction","abstract":"Predicts property prices in Ahmedabad using XGBoost with features from scraped listing data including location, BHK, amenities, and proximity to transport.","year":2023,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["real-estate","machine-learning"],"language":"en"},
-  {"id":"gls-2022-060","title":"Sign Language to Text Converter","abstract":"Converts continuous sign language video to text using a 3D CNN model that recognizes multi-frame gesture sequences from the WLASL dataset.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["accessibility","computer-vision"],"language":"en"},
-  {"id":"bca-2023-001","title":"College Result Portal","abstract":"Displays semester results for students after faculty upload marks, with grade calculation, CGPA tracking, and PDF transcript generation.","year":2023,"department":"BCA","tech_stack_tags":["php","sql","html","css","javascript"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"bca-2022-002","title":"Hotel Booking System","abstract":"An online platform for browsing, filtering, and booking hotel rooms with availability calendar, reviews, and payment integration.","year":2022,"department":"BCA","tech_stack_tags":["javascript","react","nodejs","mongodb"],"domain_tags":["hospitality","web"],"language":"en"},
-  {"id":"bca-2021-003","title":"Doctor Appointment Booking System","abstract":"Allows patients to book appointments with doctors by specialty, view availability calendars, and receive SMS reminders.","year":2021,"department":"BCA","tech_stack_tags":["python","django","sql"],"domain_tags":["healthcare","web"],"language":"en"},
-  {"id":"bca-2023-004","title":"Recipe Recommendation App","abstract":"Recommends recipes based on ingredients the user has at home using ingredient-based collaborative filtering and nutrition data.","year":2023,"department":"BCA","tech_stack_tags":["javascript","react","nodejs","mongodb"],"domain_tags":["food","web"],"language":"en"},
-  {"id":"bca-2022-005","title":"Online Quiz Platform","abstract":"A timed quiz platform with question banks, randomized question ordering, auto-grading, leaderboard, and teacher result analytics.","year":2022,"department":"BCA","tech_stack_tags":["javascript","react","nodejs","sql"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"bca-2021-006","title":"Grocery Store Management","abstract":"Point-of-sale and inventory management system for a grocery store with barcode scanning, billing, and daily sales reports.","year":2021,"department":"BCA","tech_stack_tags":["python","flask","sql"],"domain_tags":["business","web"],"language":"en"},
-  {"id":"bca-2023-007","title":"Fitness Tracker Web App","abstract":"Logs workouts, tracks calories burned and consumed, and visualizes progress trends with weekly/monthly charts.","year":2023,"department":"BCA","tech_stack_tags":["javascript","react","nodejs","mongodb"],"domain_tags":["health","web"],"language":"en"},
-  {"id":"bca-2022-008","title":"Travel Planner Application","abstract":"Helps users plan trips by suggesting itineraries, estimating budgets, and booking buses or hotels through integrated APIs.","year":2022,"department":"BCA","tech_stack_tags":["javascript","react","api-integration","nodejs"],"domain_tags":["travel","web"],"language":"en"},
-  {"id":"bca-2021-009","title":"Expense Splitting App","abstract":"Allows groups of friends to log shared expenses, automatically calculate balances, and settle up with a payment summary.","year":2021,"department":"BCA","tech_stack_tags":["javascript","react","firebase"],"domain_tags":["finance","web"],"language":"en"},
-  {"id":"bca-2023-010","title":"Portfolio Website Builder","abstract":"A no-code drag-and-drop builder for creating personal portfolio websites with customizable templates and one-click publish.","year":2023,"department":"BCA","tech_stack_tags":["javascript","react","nodejs","mongodb"],"domain_tags":["developer-tools","web"],"language":"en"},
-  {"id":"mca-2023-001","title":"Microservices-Based Banking System","abstract":"A distributed banking backend split into account, transaction, notification, and auth microservices communicating via REST and a message queue.","year":2023,"department":"MCA","tech_stack_tags":["python","fastapi","docker","sql"],"domain_tags":["finance","architecture"],"language":"en"},
-  {"id":"mca-2022-002","title":"CI/CD Pipeline Automation Tool","abstract":"A tool that monitors a Git repository and automatically builds, tests, and deploys the application to a staging server on each commit.","year":2022,"department":"MCA","tech_stack_tags":["python","docker","api-integration"],"domain_tags":["developer-tools","devops"],"language":"en"},
-  {"id":"mca-2021-003","title":"Cloud Storage Solution using MinIO","abstract":"A self-hosted cloud storage service similar to Dropbox built with MinIO, with file versioning, sharing links, and encryption at rest.","year":2021,"department":"MCA","tech_stack_tags":["python","docker","api-integration"],"domain_tags":["cloud","devops"],"language":"en"},
-  {"id":"mca-2023-004","title":"Real-Time Collaborative Code Editor","abstract":"A browser-based IDE supporting real-time multi-user code editing with syntax highlighting, cursor sharing, and live output display.","year":2023,"department":"MCA","tech_stack_tags":["javascript","nodejs","react","websocket"],"domain_tags":["developer-tools","web"],"language":"en"},
-  {"id":"mca-2022-005","title":"Graph Database-Based Social Network","abstract":"Implements a social network backend using Neo4j to model friend connections, recommending new connections using graph traversal algorithms.","year":2022,"department":"MCA","tech_stack_tags":["python","nosql","api-integration"],"domain_tags":["social-media","architecture"],"language":"en"},
-  {"id":"mca-2021-006","title":"Network Intrusion Detection System","abstract":"Detects anomalous network traffic patterns indicating intrusion attempts using a Random Forest classifier trained on the NSL-KDD dataset.","year":2021,"department":"MCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["cybersecurity","machine-learning"],"language":"en"},
-  {"id":"mca-2023-007","title":"Kubernetes Auto-Scaling Simulator","abstract":"Simulates a Kubernetes cluster and demonstrates HPA and VPA auto-scaling behavior under different synthetic load profiles.","year":2023,"department":"MCA","tech_stack_tags":["python","docker","api-integration"],"domain_tags":["cloud","devops"],"language":"en"},
-  {"id":"mca-2022-008","title":"Blockchain-Based Certificate Verification","abstract":"Issues tamper-proof academic certificates as NFTs on a private Ethereum blockchain, allowing employers to verify authenticity via a public portal.","year":2022,"department":"MCA","tech_stack_tags":["javascript","nodejs","api-integration","sql"],"domain_tags":["blockchain","edtech"],"language":"en"},
-  {"id":"mca-2021-009","title":"API Rate Limiter and Gateway","abstract":"A middleware gateway that enforces per-client rate limits, request logging, and JWT authentication for downstream microservices.","year":2021,"department":"MCA","tech_stack_tags":["python","fastapi","docker","sql"],"domain_tags":["developer-tools","architecture"],"language":"en"},
-  {"id":"mca-2023-010","title":"Distributed File System Implementation","abstract":"Implements a simplified Google File System (GFS) with a master, chunk servers, and fault tolerance via chunk replication.","year":2023,"department":"MCA","tech_stack_tags":["python","docker","api-integration"],"domain_tags":["cloud","architecture"],"language":"en"},
-  {"id":"gls-2022-061","title":"News Article Classifier by Topic","abstract":"Classifies news articles into categories (sports, politics, tech, etc.) using a fine-tuned DistilBERT model on the AG News dataset.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["nlp","media"],"language":"en"},
-  {"id":"gls-2021-062","title":"Automatic License Plate Recognition","abstract":"Reads vehicle license plate numbers from parking lot camera images using OpenCV pre-processing and Tesseract OCR.","year":2021,"department":"IMCA","tech_stack_tags":["python","computer-vision"],"domain_tags":["smart-city","computer-vision"],"language":"en"},
-  {"id":"gls-2023-063","title":"Peer-to-Peer File Sharing Application","abstract":"A decentralized file sharing desktop app where users can publish and download files directly from each other without a central server.","year":2023,"department":"IMCA","tech_stack_tags":["python","api-integration"],"domain_tags":["networking","web"],"language":"en"},
-  {"id":"gls-2022-064","title":"Automated Social Media Content Scheduler","abstract":"Allows content creators to draft and schedule posts to Twitter and Instagram in advance, with analytics on best posting times.","year":2022,"department":"IMCA","tech_stack_tags":["python","api-integration","flask","sql"],"domain_tags":["social-media","productivity"],"language":"en"},
-  {"id":"gls-2021-065","title":"Language Learning App with Spaced Repetition","abstract":"Teaches vocabulary in a second language using a spaced repetition algorithm (SM-2) that schedules reviews based on recall accuracy.","year":2021,"department":"IMCA","tech_stack_tags":["javascript","react","nodejs","sql"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2023-066","title":"Cyberbullying Detection in Online Comments","abstract":"Identifies cyberbullying and hate speech in online comments using a fine-tuned BERT model with an explainability layer showing triggering words.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning"],"domain_tags":["nlp","social-media"],"language":"en"},
-  {"id":"gls-2022-067","title":"NFT Marketplace Platform","abstract":"A web platform for minting, listing, and trading NFTs on a test Ethereum network, with MetaMask wallet integration and IPFS media storage.","year":2022,"department":"IMCA","tech_stack_tags":["javascript","react","api-integration","nodejs"],"domain_tags":["blockchain","web"],"language":"en"},
-  {"id":"gls-2021-068","title":"Timetable Generation using Genetic Algorithm","abstract":"Automatically generates conflict-free class timetables for a college department satisfying teacher availability, room capacity, and subject distribution constraints.","year":2021,"department":"IMCA","tech_stack_tags":["python","data-analysis"],"domain_tags":["edtech","optimization"],"language":"en"},
-  {"id":"gls-2023-069","title":"Survey and Feedback Analysis Tool","abstract":"Collects survey responses and automatically extracts themes and sentiment trends using NLP topic modeling (LDA) and sentiment analysis.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","flask","data-analysis"],"domain_tags":["nlp","business"],"language":"en"},
-  {"id":"gls-2022-070","title":"Gym Member Management System","abstract":"Manages gym memberships, fee payments, trainer assignments, and workout plans, with automated renewal reminder emails.","year":2022,"department":"IMCA","tech_stack_tags":["python","flask","sql"],"domain_tags":["health","business"],"language":"en"},
-  {"id":"gls-2021-071","title":"Food Nutrition Analyzer","abstract":"Lets users photograph meals and estimates calorie and macro-nutrient content using image classification and a food nutrition database.","year":2021,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning","api-integration"],"domain_tags":["health","computer-vision"],"language":"en"},
-  {"id":"gls-2023-072","title":"AR Furniture Placement App","abstract":"Uses ARKit/ARCore to place 3D furniture models in a live camera view so users can visualize how furniture would look in their room before buying.","year":2023,"department":"IMCA","tech_stack_tags":["javascript","react","api-integration"],"domain_tags":["ar-vr","e-commerce"],"language":"en"},
-  {"id":"gls-2022-073","title":"Exam Seating Arrangement Generator","abstract":"Generates exam hall seating charts from a student list and hall map, ensuring students from the same class are not seated adjacently.","year":2022,"department":"IMCA","tech_stack_tags":["python","flask","sql"],"domain_tags":["edtech","optimization"],"language":"en"},
-  {"id":"gls-2021-074","title":"Natural Language Interface for SQL Database","abstract":"Allows non-technical users to query a relational database using plain English questions that are converted to SQL using an NLP model.","year":2021,"department":"IMCA","tech_stack_tags":["python","nlp","sql","flask"],"domain_tags":["nlp","developer-tools"],"language":"en"},
-  {"id":"gls-2023-075","title":"Patient Queue Management System","abstract":"Manages patient flow in an outpatient department with token generation, real-time display boards, and estimated waiting time prediction.","year":2023,"department":"IMCA","tech_stack_tags":["python","flask","sql","javascript"],"domain_tags":["healthcare","web"],"language":"en"},
-  {"id":"gls-2022-076","title":"Deepfake Detection System","abstract":"Classifies images and video frames as real or AI-generated using a fine-tuned EfficientNet model trained on the FaceForensics++ dataset.","year":2022,"department":"IMCA","tech_stack_tags":["python","deep-learning","computer-vision"],"domain_tags":["security","computer-vision"],"language":"en"},
-  {"id":"gls-2021-077","title":"Supply Chain Visibility Dashboard","abstract":"Tracks shipment status across a supply chain with real-time GPS data from trucks, delay prediction, and exception alerting.","year":2021,"department":"IMCA","tech_stack_tags":["python","data-analysis","api-integration","react"],"domain_tags":["logistics","data-science"],"language":"en"},
-  {"id":"gls-2023-078","title":"Speech Emotion Recognition","abstract":"Classifies the emotional state of a speaker from audio recordings using MFCC features extracted from speech and a CNN+LSTM hybrid model.","year":2023,"department":"IMCA","tech_stack_tags":["python","deep-learning","machine-learning"],"domain_tags":["nlp","healthcare"],"language":"en"},
-  {"id":"gls-2022-079","title":"Product Quality Inspection using Computer Vision","abstract":"Detects surface defects on manufactured products on a conveyor belt using a YOLOv5 model, reducing manual quality control effort.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["manufacturing","computer-vision"],"language":"en"},
-  {"id":"gls-2021-080","title":"Career Guidance System using ML","abstract":"Recommends career paths to final-year students based on their academic scores, interests, and soft skills using a decision tree classifier.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","flask"],"domain_tags":["edtech","machine-learning"],"language":"en"},
-  {"id":"gls-2023-081","title":"Project Topic Novelty Checker","abstract":"A tool that accepts a student's proposed project title and checks its semantic similarity against a corpus of past submissions to flag near-duplicates.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning","fastapi"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2022-082","title":"Smart Irrigation System with ML","abstract":"Predicts optimal irrigation schedules for farms using soil moisture, weather forecast, and crop type inputs, controlled via an IoT actuator.","year":2022,"department":"IMCA","tech_stack_tags":["python","machine-learning","api-integration"],"domain_tags":["agriculture","iot"],"language":"en"},
-  {"id":"gls-2021-083","title":"Attendance Tracking using Bluetooth Beacons","abstract":"Automatically records student attendance in classrooms using Bluetooth Low Energy beacons detected by students' smartphones.","year":2021,"department":"IMCA","tech_stack_tags":["javascript","nodejs","mongodb","api-integration"],"domain_tags":["edtech","iot"],"language":"en"},
-  {"id":"gls-2023-084","title":"Duplicate Project Topic Detection for Supervisors","abstract":"A supervisor dashboard that ingests all proposed project titles and highlights pairs with high semantic similarity to help prevent duplicate approvals.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning","fastapi"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2022-085","title":"Peer Tutoring Matching Platform","abstract":"Matches students who need help in a subject with verified peer tutors from higher semesters using skill and availability matching.","year":2022,"department":"IMCA","tech_stack_tags":["python","django","sql"],"domain_tags":["edtech","web"],"language":"en"},
-  {"id":"gls-2021-086","title":"Student Project Recommendation System","abstract":"Recommends project topics to students based on their declared skills, interests, and available time using embedding-based similarity matching.","year":2021,"department":"IMCA","tech_stack_tags":["python","nlp","machine-learning","fastapi"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2023-087","title":"Pollution Source Identification using Satellite Data","abstract":"Processes Sentinel-5P satellite images to identify industrial pollution point sources and correlate with ground AQI sensor readings.","year":2023,"department":"IMCA","tech_stack_tags":["python","data-analysis","machine-learning"],"domain_tags":["environment","data-science"],"language":"en"},
-  {"id":"gls-2022-088","title":"Gym Exercise Form Classifier","abstract":"Classifies whether a user is performing a gym exercise with correct form using pose estimation landmarks from MediaPipe and a sequence model.","year":2022,"department":"IMCA","tech_stack_tags":["python","computer-vision","machine-learning"],"domain_tags":["health","computer-vision"],"language":"en"},
-  {"id":"gls-2021-089","title":"Customer Feedback Summarizer","abstract":"Aggregates customer reviews from multiple sources and generates structured summaries of top praised and criticized product aspects using NLP.","year":2021,"department":"IMCA","tech_stack_tags":["python","nlp","data-analysis"],"domain_tags":["nlp","business"],"language":"en"},
-  {"id":"gls-2023-090","title":"Anti-Poaching Wildlife Alert System","abstract":"Analyzes camera trap images from forest areas using a fine-tuned YOLO model to detect humans in restricted zones and trigger ranger alerts.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning","api-integration"],"domain_tags":["environment","computer-vision"],"language":"en"},
-  {"id":"gls-2022-091","title":"Competitive Programming Practice Platform","abstract":"A Leetcode-style platform for students with problems, an in-browser code editor, automated test case evaluation, and a difficulty rating system.","year":2022,"department":"IMCA","tech_stack_tags":["javascript","react","nodejs","docker","sql"],"domain_tags":["edtech","developer-tools"],"language":"en"},
-  {"id":"gls-2021-092","title":"Electricity Consumption Forecasting","abstract":"Forecasts residential electricity demand at a substation level using LSTM on historical consumption data to aid distribution planning.","year":2021,"department":"IMCA","tech_stack_tags":["python","deep-learning","data-analysis"],"domain_tags":["energy","data-science"],"language":"en"},
-  {"id":"gls-2023-093","title":"Handwriting-to-Text Converter for Notes","abstract":"Converts handwritten study notes photographed on a smartphone into searchable digital text using a fine-tuned HTR model.","year":2023,"department":"IMCA","tech_stack_tags":["python","computer-vision","deep-learning"],"domain_tags":["edtech","computer-vision"],"language":"en"},
-  {"id":"gls-2022-094","title":"AI Tutor for Programming Concepts","abstract":"An interactive chatbot tutor that answers programming questions, explains concepts using analogies, and generates practice exercises on demand.","year":2022,"department":"IMCA","tech_stack_tags":["python","nlp","api-integration","flask"],"domain_tags":["edtech","nlp"],"language":"en"},
-  {"id":"gls-2021-095","title":"Traffic Volume Prediction for Route Planning","abstract":"Predicts traffic volume on Ahmedabad road segments at different times using XGBoost trained on GPS probe vehicle data.","year":2021,"department":"IMCA","tech_stack_tags":["python","machine-learning","data-analysis"],"domain_tags":["smart-city","data-science"],"language":"en"},
-  {"id":"gls-2023-096","title":"Resume Builder with ATS Optimization","abstract":"A resume building tool that scores the resume against a job description for ATS (Applicant Tracking System) compatibility and suggests keyword improvements.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","react","fastapi"],"domain_tags":["hr-tech","nlp"],"language":"en"},
-  {"id":"gls-2022-097","title":"Event Ticketing System with Dynamic Pricing","abstract":"An online ticketing platform that adjusts ticket prices dynamically based on demand and remaining availability, similar to BookMyShow.","year":2022,"department":"IMCA","tech_stack_tags":["python","django","sql","javascript"],"domain_tags":["entertainment","web"],"language":"en"},
-  {"id":"gls-2021-098","title":"Volunteer Management System for NGOs","abstract":"Helps NGOs manage volunteer registrations, event assignments, hour tracking, and certificate generation for social impact projects.","year":2021,"department":"IMCA","tech_stack_tags":["python","flask","sql"],"domain_tags":["social","web"],"language":"en"},
-  {"id":"gls-2023-099","title":"Interview Question Generator using LLM","abstract":"Generates role-specific technical interview questions from a job description using a prompted language model, with difficulty tagging.","year":2023,"department":"IMCA","tech_stack_tags":["python","nlp","api-integration","fastapi"],"domain_tags":["hr-tech","nlp"],"language":"en"},
-  {"id":"gls-2022-100","title":"Hospital Readmission Prediction","abstract":"Predicts the probability of a patient being readmitted within 30 days of discharge using clinical notes and structured EHR data.","year":2022,"department":"IMCA","tech_stack_tags":["python","machine-learning","nlp","data-analysis"],"domain_tags":["healthcare","machine-learning"],"language":"en"}
+  {
+    "id": "gls-2023-001",
+    "title": "AI-Based Resume Screening Tool",
+    "abstract": "A system that screens resumes against job descriptions using sentence embeddings and cosine similarity to automatically rank candidates by fit score.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask"
+    ],
+    "domain_tags": [
+      "hr-tech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-002",
+    "title": "Fake News Detection using NLP",
+    "abstract": "Classifies news articles as real or fake using TF-IDF features and a logistic regression classifier trained on a public dataset.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-003",
+    "title": "Student Performance Prediction System",
+    "abstract": "Predicts final exam scores using regression models over attendance, assignment scores, and mid-term results collected from an LMS.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "edtech",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-004",
+    "title": "E-Commerce Product Recommendation Engine",
+    "abstract": "Collaborative filtering recommendation system that suggests products to users based on purchase and browsing history using matrix factorization.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "flask",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "e-commerce",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-005",
+    "title": "Sentiment Analysis of Twitter Data",
+    "abstract": "Analyzes public sentiment on Twitter using VADER and fine-tuned BERT for real-time tweet classification into positive, negative, and neutral.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-006",
+    "title": "Face Recognition Attendance System",
+    "abstract": "Marks student attendance automatically using OpenCV face detection and recognition pipeline with a local SQLite database.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-007",
+    "title": "Chatbot for College FAQs",
+    "abstract": "A rule-based and intent-classification chatbot that answers frequently asked questions about admissions, timetable, and college policies.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask",
+      "javascript"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-008",
+    "title": "Image Caption Generator",
+    "abstract": "Generates descriptive captions for images using a CNN encoder and LSTM decoder trained on the MSCOCO dataset.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "computer-vision"
+    ],
+    "domain_tags": [
+      "computer-vision",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-009",
+    "title": "Online Exam Proctoring System",
+    "abstract": "Detects cheating during online exams using webcam-based face tracking, gaze estimation, and tab-switch monitoring in the browser.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "javascript",
+      "nodejs"
+    ],
+    "domain_tags": [
+      "edtech",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-010",
+    "title": "Stock Price Prediction using LSTM",
+    "abstract": "Forecasts next-day closing prices for NSE-listed stocks using a stacked LSTM model trained on 5 years of OHLCV historical data.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "finance",
+      "deep-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-011",
+    "title": "Smart Traffic Signal Control using Computer Vision",
+    "abstract": "Uses YOLOv8 to count vehicles at intersections in real time and dynamically adjusts signal timings to reduce idle wait time.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-012",
+    "title": "Crop Disease Detection from Leaf Images",
+    "abstract": "Classifies plant leaf diseases using a fine-tuned ResNet-50 model trained on the PlantVillage dataset, deployed as a mobile-friendly web app.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning",
+      "flask"
+    ],
+    "domain_tags": [
+      "agriculture",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-013",
+    "title": "Medical Image Segmentation using U-Net",
+    "abstract": "Segments tumor regions in MRI brain scans using a U-Net architecture trained on the BraTS 2020 dataset.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "computer-vision"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "deep-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-014",
+    "title": "Sign Language Recognition System",
+    "abstract": "Recognizes ASL hand gestures from webcam input using MediaPipe hand landmarks and a trained Random Forest classifier.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "accessibility",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-015",
+    "title": "Document Summarization using Transformers",
+    "abstract": "Generates abstractive summaries of long documents using a fine-tuned BART model, with a simple web interface for pasting text.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask"
+    ],
+    "domain_tags": [
+      "nlp",
+      "productivity"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-016",
+    "title": "Movie Recommendation System",
+    "abstract": "Recommends movies to users based on viewing history and genre preferences using collaborative filtering and content-based filtering hybrid.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "flask"
+    ],
+    "domain_tags": [
+      "entertainment",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-017",
+    "title": "Real-Time Object Detection for Blind Assistance",
+    "abstract": "Detects objects in a video stream using YOLOv5 and converts detections to audio descriptions to assist visually impaired users.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "accessibility",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-018",
+    "title": "Automated Code Review Tool using NLP",
+    "abstract": "Analyzes code diffs using NLP to detect common anti-patterns, naming violations, and missing docstrings, and suggests inline fixes.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "developer-tools",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-019",
+    "title": "Credit Card Fraud Detection",
+    "abstract": "Detects fraudulent transactions in real time using an XGBoost model trained on the anonymized European credit card fraud dataset.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "finance",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-020",
+    "title": "Customer Churn Prediction for Telecom",
+    "abstract": "Predicts which telecom customers are likely to churn using a gradient boosted classifier and a SHAP-based explanation dashboard.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "telecom",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-021",
+    "title": "Handwritten Digit Recognition Web App",
+    "abstract": "Lets users draw digits on a canvas and classifies them using a CNN trained on MNIST, deployed as a real-time browser app.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "javascript",
+      "html",
+      "css"
+    ],
+    "domain_tags": [
+      "deep-learning",
+      "education"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-022",
+    "title": "Emotion Detection from Facial Expressions",
+    "abstract": "Detects the emotional state of a person from webcam video frames using a CNN trained on the FER-2013 dataset.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-023",
+    "title": "Smart Home Automation Dashboard",
+    "abstract": "Controls home appliances via a web dashboard connected to a Raspberry Pi and ESP8266 modules, with scheduling and voice command support.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "javascript",
+      "react",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "iot",
+      "smart-home"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-024",
+    "title": "Job Portal with Skill-Based Matching",
+    "abstract": "A full-stack job board that matches candidates to job posts using TF-IDF skill overlap scoring between resumes and job descriptions.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql",
+      "nlp"
+    ],
+    "domain_tags": [
+      "hr-tech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-025",
+    "title": "Online Library Management System",
+    "abstract": "A web application for managing books, members, and lending records with search, overdue reminders, and PDF report generation.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-026",
+    "title": "Automatic Question Paper Generator",
+    "abstract": "Generates balanced question papers from a question bank using NLP difficulty tagging and topic coverage constraints.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-027",
+    "title": "E-Learning Platform with Quiz Module",
+    "abstract": "A course delivery platform with video lessons, interactive quizzes, progress tracking, and certificate generation.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-028",
+    "title": "Inventory Management System for Retail",
+    "abstract": "Manages stock levels, purchase orders, and supplier records for a retail shop, with low-stock alerts and sales analytics.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "business",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-029",
+    "title": "Mental Health Chatbot using CBT Techniques",
+    "abstract": "A conversational chatbot that applies Cognitive Behavioral Therapy prompts to help users identify and reframe negative thought patterns.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-030",
+    "title": "Plagiarism Detection Tool for Academic Papers",
+    "abstract": "Computes semantic similarity between submitted academic papers and a corpus of published work using sentence embeddings and cosine similarity.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-031",
+    "title": "Weather Forecasting using ARIMA",
+    "abstract": "Builds a time-series forecasting model using ARIMA on historical Ahmedabad weather data to predict temperature and rainfall 7 days ahead.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "data-science",
+      "environment"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-032",
+    "title": "Voice Assistant for College Admin Tasks",
+    "abstract": "A voice-activated assistant built with SpeechRecognition and GPT API that handles leave applications, timetable queries, and exam schedules.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-033",
+    "title": "Social Media Analytics Dashboard",
+    "abstract": "Aggregates posts from Twitter and Instagram and displays engagement, sentiment trends, and top hashtags on a real-time dashboard.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis",
+      "api-integration",
+      "react"
+    ],
+    "domain_tags": [
+      "social-media",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-034",
+    "title": "Blood Bank Management System",
+    "abstract": "Manages donor registrations, blood stock levels, and request matching for hospitals, with SMS alerts for urgent blood requirements.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-035",
+    "title": "Personalized News Aggregator",
+    "abstract": "Fetches news from multiple RSS feeds and ranks articles by user interest profile built from reading history using TF-IDF and cosine similarity.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "nlp",
+      "media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-036",
+    "title": "Smart Attendance using QR Code",
+    "abstract": "Students scan a time-limited QR code shown on a projector to mark attendance, with GPS verification to prevent proxy marking.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-037",
+    "title": "Hostel Management System",
+    "abstract": "Handles room allotments, fee payments, complaint logging, and warden communication for a college hostel administration.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-038",
+    "title": "Road Pothole Detection using Deep Learning",
+    "abstract": "Detects and classifies road surface defects from dashcam footage using a fine-tuned YOLOv8 model, and generates GPS-tagged reports.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-039",
+    "title": "E-Voting System with Facial Authentication",
+    "abstract": "Allows registered voters to cast ballots online after face-recognition identity verification, with tamper-proof audit logs.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "governance",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-040",
+    "title": "Expense Tracker with Category Prediction",
+    "abstract": "Records personal expenses and uses an NLP classifier to auto-categorize transactions from a description field into budget categories.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "finance",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-041",
+    "title": "Automated Invoice Processing with OCR",
+    "abstract": "Extracts vendor name, date, line items, and totals from scanned invoice PDFs using Tesseract OCR and named entity recognition.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "computer-vision"
+    ],
+    "domain_tags": [
+      "finance",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-042",
+    "title": "Music Genre Classification using CNNs",
+    "abstract": "Classifies audio clips into 10 music genres using mel-spectrogram features extracted from audio files and a CNN trained on the GTZAN dataset.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "entertainment",
+      "deep-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-043",
+    "title": "Fake Product Review Detection",
+    "abstract": "Identifies paid/fake product reviews on e-commerce sites using a combination of review text NLP features and reviewer behavioral signals.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "e-commerce",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-044",
+    "title": "Drowsiness Detection for Drivers",
+    "abstract": "Monitors a driver's eye aspect ratio using facial landmarks from dlib and triggers an audio alert when drowsiness is detected.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "safety",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-045",
+    "title": "Virtual Try-On for E-Commerce",
+    "abstract": "Overlays clothing items onto a user's image using pose estimation and image warping, allowing virtual try-on in the browser.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning",
+      "javascript"
+    ],
+    "domain_tags": [
+      "e-commerce",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-046",
+    "title": "Air Quality Index Prediction",
+    "abstract": "Predicts AQI for Indian cities using sensor readings and meteorological data via a gradient boosted regression model with SHAP explanations.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "environment",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-047",
+    "title": "College Event Management Portal",
+    "abstract": "A web platform for posting, registering, and managing college events with QR-based check-in, team formation, and result publishing.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-048",
+    "title": "Text-to-SQL Query Generator",
+    "abstract": "Converts natural language questions about a database into valid SQL queries using a fine-tuned T5 model and a query validation layer.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "sql"
+    ],
+    "domain_tags": [
+      "nlp",
+      "developer-tools"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-049",
+    "title": "Campus Food Ordering App",
+    "abstract": "A mobile-friendly web app allowing students to order food from the college canteen with real-time preparation status and wallet payment.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "campus",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-050",
+    "title": "Parking Slot Detection using Computer Vision",
+    "abstract": "Detects available and occupied parking slots from a surveillance camera feed using a segmentation model and generates a live occupancy map.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-051",
+    "title": "Hindi Sentiment Analysis",
+    "abstract": "Classifies sentiment in Hindi social media comments using a transliteration-aware preprocessing pipeline and a multilingual BERT model.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "hi"
+  },
+  {
+    "id": "gls-2021-052",
+    "title": "Automated Plant Watering System with IoT",
+    "abstract": "Waters plants automatically based on soil moisture sensor data using a NodeMCU and a Flask dashboard for remote monitoring and scheduling.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "iot",
+      "agriculture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-053",
+    "title": "Legal Document Clause Extractor",
+    "abstract": "Extracts key clauses (jurisdiction, penalty, termination) from legal contracts using NLP named entity recognition and rule-based patterns.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask"
+    ],
+    "domain_tags": [
+      "legal",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-054",
+    "title": "Diabetes Risk Prediction System",
+    "abstract": "Predicts a patient's risk of developing Type 2 diabetes using health indicators from the Pima Indians dataset and a logistic regression model.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-055",
+    "title": "Heart Disease Prediction using ML",
+    "abstract": "Predicts likelihood of coronary heart disease from clinical parameters using an ensemble of Random Forest and SVM classifiers.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-056",
+    "title": "Automatic Caption Generation for Social Media",
+    "abstract": "Generates engaging captions for uploaded photos by combining image-to-text description and tone-adjustment using a language model.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "nlp",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "social-media",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-057",
+    "title": "Smart Mirror with Daily Briefing",
+    "abstract": "A Raspberry Pi-powered mirror display that shows time, weather, news headlines, and daily schedule with voice command control.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "api-integration",
+      "javascript"
+    ],
+    "domain_tags": [
+      "iot",
+      "smart-home"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-058",
+    "title": "Bus Route Optimizer using Genetic Algorithm",
+    "abstract": "Optimizes city bus routes to minimize travel time and fuel consumption using a genetic algorithm on real Ahmedabad BRTS data.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "optimization"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-059",
+    "title": "Real Estate Price Prediction",
+    "abstract": "Predicts property prices in Ahmedabad using XGBoost with features from scraped listing data including location, BHK, amenities, and proximity to transport.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "real-estate",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-060",
+    "title": "Sign Language to Text Converter",
+    "abstract": "Converts continuous sign language video to text using a 3D CNN model that recognizes multi-frame gesture sequences from the WLASL dataset.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "accessibility",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2023-001",
+    "title": "College Result Portal",
+    "abstract": "Displays semester results for students after faculty upload marks, with grade calculation, CGPA tracking, and PDF transcript generation.",
+    "year": 2023,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "php",
+      "sql",
+      "html",
+      "css",
+      "javascript"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2022-002",
+    "title": "Hotel Booking System",
+    "abstract": "An online platform for browsing, filtering, and booking hotel rooms with availability calendar, reviews, and payment integration.",
+    "year": 2022,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "hospitality",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2021-003",
+    "title": "Doctor Appointment Booking System",
+    "abstract": "Allows patients to book appointments with doctors by specialty, view availability calendars, and receive SMS reminders.",
+    "year": 2021,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2023-004",
+    "title": "Recipe Recommendation App",
+    "abstract": "Recommends recipes based on ingredients the user has at home using ingredient-based collaborative filtering and nutrition data.",
+    "year": 2023,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "food",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2022-005",
+    "title": "Online Quiz Platform",
+    "abstract": "A timed quiz platform with question banks, randomized question ordering, auto-grading, leaderboard, and teacher result analytics.",
+    "year": 2022,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2021-006",
+    "title": "Grocery Store Management",
+    "abstract": "Point-of-sale and inventory management system for a grocery store with barcode scanning, billing, and daily sales reports.",
+    "year": 2021,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "business",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2023-007",
+    "title": "Fitness Tracker Web App",
+    "abstract": "Logs workouts, tracks calories burned and consumed, and visualizes progress trends with weekly/monthly charts.",
+    "year": 2023,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "health",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2022-008",
+    "title": "Travel Planner Application",
+    "abstract": "Helps users plan trips by suggesting itineraries, estimating budgets, and booking buses or hotels through integrated APIs.",
+    "year": 2022,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "api-integration",
+      "nodejs"
+    ],
+    "domain_tags": [
+      "travel",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2021-009",
+    "title": "Expense Splitting App",
+    "abstract": "Allows groups of friends to log shared expenses, automatically calculate balances, and settle up with a payment summary.",
+    "year": 2021,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "firebase"
+    ],
+    "domain_tags": [
+      "finance",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "bca-2023-010",
+    "title": "Portfolio Website Builder",
+    "abstract": "A no-code drag-and-drop builder for creating personal portfolio websites with customizable templates and one-click publish.",
+    "year": 2023,
+    "department": "BCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "mongodb"
+    ],
+    "domain_tags": [
+      "developer-tools",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2023-001",
+    "title": "Microservices-Based Banking System",
+    "abstract": "A distributed banking backend split into account, transaction, notification, and auth microservices communicating via REST and a message queue.",
+    "year": 2023,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "fastapi",
+      "docker",
+      "sql"
+    ],
+    "domain_tags": [
+      "finance",
+      "architecture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2022-002",
+    "title": "CI/CD Pipeline Automation Tool",
+    "abstract": "A tool that monitors a Git repository and automatically builds, tests, and deploys the application to a staging server on each commit.",
+    "year": 2022,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "docker",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "developer-tools",
+      "devops"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2021-003",
+    "title": "Cloud Storage Solution using MinIO",
+    "abstract": "A self-hosted cloud storage service similar to Dropbox built with MinIO, with file versioning, sharing links, and encryption at rest.",
+    "year": 2021,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "docker",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "cloud",
+      "devops"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2023-004",
+    "title": "Real-Time Collaborative Code Editor",
+    "abstract": "A browser-based IDE supporting real-time multi-user code editing with syntax highlighting, cursor sharing, and live output display.",
+    "year": 2023,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "javascript",
+      "nodejs",
+      "react",
+      "websocket"
+    ],
+    "domain_tags": [
+      "developer-tools",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2022-005",
+    "title": "Graph Database-Based Social Network",
+    "abstract": "Implements a social network backend using Neo4j to model friend connections, recommending new connections using graph traversal algorithms.",
+    "year": 2022,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "nosql",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "social-media",
+      "architecture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2021-006",
+    "title": "Network Intrusion Detection System",
+    "abstract": "Detects anomalous network traffic patterns indicating intrusion attempts using a Random Forest classifier trained on the NSL-KDD dataset.",
+    "year": 2021,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "cybersecurity",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2023-007",
+    "title": "Kubernetes Auto-Scaling Simulator",
+    "abstract": "Simulates a Kubernetes cluster and demonstrates HPA and VPA auto-scaling behavior under different synthetic load profiles.",
+    "year": 2023,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "docker",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "cloud",
+      "devops"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2022-008",
+    "title": "Blockchain-Based Certificate Verification",
+    "abstract": "Issues tamper-proof academic certificates as NFTs on a private Ethereum blockchain, allowing employers to verify authenticity via a public portal.",
+    "year": 2022,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "javascript",
+      "nodejs",
+      "api-integration",
+      "sql"
+    ],
+    "domain_tags": [
+      "blockchain",
+      "edtech"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2021-009",
+    "title": "API Rate Limiter and Gateway",
+    "abstract": "A middleware gateway that enforces per-client rate limits, request logging, and JWT authentication for downstream microservices.",
+    "year": 2021,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "fastapi",
+      "docker",
+      "sql"
+    ],
+    "domain_tags": [
+      "developer-tools",
+      "architecture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "mca-2023-010",
+    "title": "Distributed File System Implementation",
+    "abstract": "Implements a simplified Google File System (GFS) with a master, chunk servers, and fault tolerance via chunk replication.",
+    "year": 2023,
+    "department": "MCA",
+    "tech_stack_tags": [
+      "python",
+      "docker",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "cloud",
+      "architecture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-061",
+    "title": "News Article Classifier by Topic",
+    "abstract": "Classifies news articles into categories (sports, politics, tech, etc.) using a fine-tuned DistilBERT model on the AG News dataset.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "nlp",
+      "media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-062",
+    "title": "Automatic License Plate Recognition",
+    "abstract": "Reads vehicle license plate numbers from parking lot camera images using OpenCV pre-processing and Tesseract OCR.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-063",
+    "title": "Peer-to-Peer File Sharing Application",
+    "abstract": "A decentralized file sharing desktop app where users can publish and download files directly from each other without a central server.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "networking",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-064",
+    "title": "Automated Social Media Content Scheduler",
+    "abstract": "Allows content creators to draft and schedule posts to Twitter and Instagram in advance, with analytics on best posting times.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "api-integration",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "social-media",
+      "productivity"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-065",
+    "title": "Language Learning App with Spaced Repetition",
+    "abstract": "Teaches vocabulary in a second language using a spaced repetition algorithm (SM-2) that schedules reviews based on recall accuracy.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-066",
+    "title": "Cyberbullying Detection in Online Comments",
+    "abstract": "Identifies cyberbullying and hate speech in online comments using a fine-tuned BERT model with an explainability layer showing triggering words.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "nlp",
+      "social-media"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-067",
+    "title": "NFT Marketplace Platform",
+    "abstract": "A web platform for minting, listing, and trading NFTs on a test Ethereum network, with MetaMask wallet integration and IPFS media storage.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "api-integration",
+      "nodejs"
+    ],
+    "domain_tags": [
+      "blockchain",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-068",
+    "title": "Timetable Generation using Genetic Algorithm",
+    "abstract": "Automatically generates conflict-free class timetables for a college department satisfying teacher availability, room capacity, and subject distribution constraints.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "edtech",
+      "optimization"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-069",
+    "title": "Survey and Feedback Analysis Tool",
+    "abstract": "Collects survey responses and automatically extracts themes and sentiment trends using NLP topic modeling (LDA) and sentiment analysis.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "flask",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "nlp",
+      "business"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-070",
+    "title": "Gym Member Management System",
+    "abstract": "Manages gym memberships, fee payments, trainer assignments, and workout plans, with automated renewal reminder emails.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "health",
+      "business"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-071",
+    "title": "Food Nutrition Analyzer",
+    "abstract": "Lets users photograph meals and estimates calorie and macro-nutrient content using image classification and a food nutrition database.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "health",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-072",
+    "title": "AR Furniture Placement App",
+    "abstract": "Uses ARKit/ARCore to place 3D furniture models in a live camera view so users can visualize how furniture would look in their room before buying.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "ar-vr",
+      "e-commerce"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-073",
+    "title": "Exam Seating Arrangement Generator",
+    "abstract": "Generates exam hall seating charts from a student list and hall map, ensuring students from the same class are not seated adjacently.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "optimization"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-074",
+    "title": "Natural Language Interface for SQL Database",
+    "abstract": "Allows non-technical users to query a relational database using plain English questions that are converted to SQL using an NLP model.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "sql",
+      "flask"
+    ],
+    "domain_tags": [
+      "nlp",
+      "developer-tools"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-075",
+    "title": "Patient Queue Management System",
+    "abstract": "Manages patient flow in an outpatient department with token generation, real-time display boards, and estimated waiting time prediction.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-076",
+    "title": "Deepfake Detection System",
+    "abstract": "Classifies images and video frames as real or AI-generated using a fine-tuned EfficientNet model trained on the FaceForensics++ dataset.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "computer-vision"
+    ],
+    "domain_tags": [
+      "security",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-077",
+    "title": "Supply Chain Visibility Dashboard",
+    "abstract": "Tracks shipment status across a supply chain with real-time GPS data from trucks, delay prediction, and exception alerting.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis",
+      "api-integration",
+      "react"
+    ],
+    "domain_tags": [
+      "logistics",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-078",
+    "title": "Speech Emotion Recognition",
+    "abstract": "Classifies the emotional state of a speaker from audio recordings using MFCC features extracted from speech and a CNN+LSTM hybrid model.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "nlp",
+      "healthcare"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-079",
+    "title": "Product Quality Inspection using Computer Vision",
+    "abstract": "Detects surface defects on manufactured products on a conveyor belt using a YOLOv5 model, reducing manual quality control effort.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "manufacturing",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-080",
+    "title": "Career Guidance System using ML",
+    "abstract": "Recommends career paths to final-year students based on their academic scores, interests, and soft skills using a decision tree classifier.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "flask"
+    ],
+    "domain_tags": [
+      "edtech",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-081",
+    "title": "Project Topic Novelty Checker",
+    "abstract": "A tool that accepts a student's proposed project title and checks its semantic similarity against a corpus of past submissions to flag near-duplicates.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning",
+      "fastapi"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-082",
+    "title": "Smart Irrigation System with ML",
+    "abstract": "Predicts optimal irrigation schedules for farms using soil moisture, weather forecast, and crop type inputs, controlled via an IoT actuator.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "agriculture",
+      "iot"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-083",
+    "title": "Attendance Tracking using Bluetooth Beacons",
+    "abstract": "Automatically records student attendance in classrooms using Bluetooth Low Energy beacons detected by students' smartphones.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "nodejs",
+      "mongodb",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "edtech",
+      "iot"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-084",
+    "title": "Duplicate Project Topic Detection for Supervisors",
+    "abstract": "A supervisor dashboard that ingests all proposed project titles and highlights pairs with high semantic similarity to help prevent duplicate approvals.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning",
+      "fastapi"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-085",
+    "title": "Peer Tutoring Matching Platform",
+    "abstract": "Matches students who need help in a subject with verified peer tutors from higher semesters using skill and availability matching.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-086",
+    "title": "Student Project Recommendation System",
+    "abstract": "Recommends project topics to students based on their declared skills, interests, and available time using embedding-based similarity matching.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "machine-learning",
+      "fastapi"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-087",
+    "title": "Pollution Source Identification using Satellite Data",
+    "abstract": "Processes Sentinel-5P satellite images to identify industrial pollution point sources and correlate with ground AQI sensor readings.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "data-analysis",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "environment",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-088",
+    "title": "Gym Exercise Form Classifier",
+    "abstract": "Classifies whether a user is performing a gym exercise with correct form using pose estimation landmarks from MediaPipe and a sequence model.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "machine-learning"
+    ],
+    "domain_tags": [
+      "health",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-089",
+    "title": "Customer Feedback Summarizer",
+    "abstract": "Aggregates customer reviews from multiple sources and generates structured summaries of top praised and criticized product aspects using NLP.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "nlp",
+      "business"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-090",
+    "title": "Anti-Poaching Wildlife Alert System",
+    "abstract": "Analyzes camera trap images from forest areas using a fine-tuned YOLO model to detect humans in restricted zones and trigger ranger alerts.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning",
+      "api-integration"
+    ],
+    "domain_tags": [
+      "environment",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-091",
+    "title": "Competitive Programming Practice Platform",
+    "abstract": "A Leetcode-style platform for students with problems, an in-browser code editor, automated test case evaluation, and a difficulty rating system.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "javascript",
+      "react",
+      "nodejs",
+      "docker",
+      "sql"
+    ],
+    "domain_tags": [
+      "edtech",
+      "developer-tools"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-092",
+    "title": "Electricity Consumption Forecasting",
+    "abstract": "Forecasts residential electricity demand at a substation level using LSTM on historical consumption data to aid distribution planning.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "deep-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "energy",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-093",
+    "title": "Handwriting-to-Text Converter for Notes",
+    "abstract": "Converts handwritten study notes photographed on a smartphone into searchable digital text using a fine-tuned HTR model.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "domain_tags": [
+      "edtech",
+      "computer-vision"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-094",
+    "title": "AI Tutor for Programming Concepts",
+    "abstract": "An interactive chatbot tutor that answers programming questions, explains concepts using analogies, and generates practice exercises on demand.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "api-integration",
+      "flask"
+    ],
+    "domain_tags": [
+      "edtech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-095",
+    "title": "Traffic Volume Prediction for Route Planning",
+    "abstract": "Predicts traffic volume on Ahmedabad road segments at different times using XGBoost trained on GPS probe vehicle data.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "smart-city",
+      "data-science"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-096",
+    "title": "Resume Builder with ATS Optimization",
+    "abstract": "A resume building tool that scores the resume against a job description for ATS (Applicant Tracking System) compatibility and suggests keyword improvements.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "react",
+      "fastapi"
+    ],
+    "domain_tags": [
+      "hr-tech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-097",
+    "title": "Event Ticketing System with Dynamic Pricing",
+    "abstract": "An online ticketing platform that adjusts ticket prices dynamically based on demand and remaining availability, similar to BookMyShow.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "django",
+      "sql",
+      "javascript"
+    ],
+    "domain_tags": [
+      "entertainment",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2021-098",
+    "title": "Volunteer Management System for NGOs",
+    "abstract": "Helps NGOs manage volunteer registrations, event assignments, hour tracking, and certificate generation for social impact projects.",
+    "year": 2021,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "flask",
+      "sql"
+    ],
+    "domain_tags": [
+      "social",
+      "web"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2023-099",
+    "title": "Interview Question Generator using LLM",
+    "abstract": "Generates role-specific technical interview questions from a job description using a prompted language model, with difficulty tagging.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "nlp",
+      "api-integration",
+      "fastapi"
+    ],
+    "domain_tags": [
+      "hr-tech",
+      "nlp"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "gls-2022-100",
+    "title": "Hospital Readmission Prediction",
+    "abstract": "Predicts the probability of a patient being readmitted within 30 days of discharge using clinical notes and structured EHR data.",
+    "year": 2022,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "python",
+      "machine-learning",
+      "nlp",
+      "data-analysis"
+    ],
+    "domain_tags": [
+      "healthcare",
+      "machine-learning"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-001",
+    "title": "Blockchain-Based Academic Certificate Verification System",
+    "abstract": "A decentralized platform for issuing and verifying student academic credentials using Ethereum smart contracts and QR codes to eliminate certificate forgery.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "api-integration",
+      "javascript",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech",
+      "security"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-002",
+    "title": "Crop Disease Detection using Deep Learning and Drone Imagery",
+    "abstract": "A mobile-linked system that analyzes aerial drone photos of farmland using a fine-tuned YOLOv8 model to detect 12 types of crop disease with 91% accuracy.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "deep-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech",
+      "environment",
+      "healthcare",
+      "iot"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2023-003",
+    "title": "AI-Powered Mental Health Chatbot for Students",
+    "abstract": "A conversational chatbot that uses NLP sentiment analysis and CBT-based response templates to provide mental wellness support and escalation alerts for college students.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "api-integration",
+      "flask",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "edtech",
+      "healthcare"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-004",
+    "title": "Personalized E-Learning Content Recommender",
+    "abstract": "Recommends online course chapters and YouTube tutorials to students based on their quiz performance history using collaborative filtering and BERT embeddings.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "machine-learning",
+      "nlp",
+      "python",
+      "react"
+    ],
+    "domain_tags": [
+      "edtech"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2023-005",
+    "title": "Smart City Pothole Detection with Edge AI",
+    "abstract": "Real-time pothole detection using a lightweight MobileNetV2 model deployed on a Raspberry Pi fitted to garbage vehicles to map road damage across city grids.",
+    "year": 2023,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "deep-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "iot",
+      "smart-city"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-006",
+    "title": "Deepfake Detection in Social Media Videos",
+    "abstract": "A browser extension that flags AI-generated face-swapped videos using a CNN-LSTM model trained on the FaceForensics++ dataset.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "deep-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "security",
+      "social"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-007",
+    "title": "Multilingual Legal Document Summarizer",
+    "abstract": "Summarizes court orders and government circulars in English and Hindi using mT5 transformer fine-tuned on Indian legal corpus documents.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "api-integration",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "social"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-008",
+    "title": "Stock Price Prediction using Transformer Architecture",
+    "abstract": "A financial forecasting dashboard that uses Temporal Fusion Transformer on 5 years of NSE stock data to predict next-day price movements and confidence bands.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "data-analysis",
+      "deep-learning",
+      "machine-learning",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "finance"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2026-009",
+    "title": "IoT-Based Smart Greenhouse Automation System",
+    "abstract": "Monitors temperature",
+    "year": 2026,
+    "department": "python;iot;api-integration",
+    "tech_stack_tags": [
+      "python"
+    ],
+    "domain_tags": [
+      "iot",
+      "soil moisture"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-010",
+    "title": "Sign Language to Text Converter using CNN and MediaPipe",
+    "abstract": "Translates Indian Sign Language hand gestures captured by webcam into real-time English text using MediaPipe Hands and a fine-tuned EfficientNet classifier.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "computer-vision",
+      "deep-learning",
+      "nlp",
+      "python"
+    ],
+    "domain_tags": [
+      "healthcare"
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2026-011",
+    "title": "Automated Code Review Assistant using LLM",
+    "abstract": "A VS Code extension that reviews GitHub pull requests and provides inline style",
+    "year": 2026,
+    "department": "developer-tools",
+    "tech_stack_tags": [
+      "nlp"
+    ],
+    "domain_tags": [
+      "and logic feedback by querying an llm with code diffs."
+    ],
+    "language": "en"
+  },
+  {
+    "id": "up-2024-012",
+    "title": "Fraud Detection in UPI Transactions using Graph Neural Networks",
+    "abstract": "Detects fraudulent UPI payment patterns in real time by modeling transaction networks as graphs and applying GNN anomaly scoring.",
+    "year": 2024,
+    "department": "IMCA",
+    "tech_stack_tags": [
+      "data-analysis",
+      "deep-learning",
+      "machine-learning",
+      "python"
+    ],
+    "domain_tags": [
+      "finance"
+    ],
+    "language": "en"
+  }
 ]
